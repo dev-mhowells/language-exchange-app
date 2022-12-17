@@ -6,7 +6,7 @@ export default function User() {
 
     useEffect(() => {
         fetch('/user').then(response => response.json())
-        .then(data => {console.log(data); setUserData(data)})
+        .then(data => {setUserData(data)})
     }, [])
 
     const userDisplay = userData && userData.map((el) => { 
@@ -19,9 +19,15 @@ export default function User() {
     )})
 
     return(
-        <div>
-            <h1>This is the user page</h1>
-            {userDisplay}
-        </div>
+        <main className="profile-main">
+            <div className="profile-container profile-header"></div>
+            <div className="profile-container profile-trust-container"></div>
+            <div className="profile-container profile-about-container"></div>
+            <div className="profile-container profile-corrections-container"></div>
+            <div className="profile-container profile-posts-container"></div>
+
+            {/* <h1>This is the user page</h1>
+            {userDisplay} */}
+        </main>
     )
 }
