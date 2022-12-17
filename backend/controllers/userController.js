@@ -1,5 +1,4 @@
 const User = require('../models/user')
-const mongoose = require('mongoose')
 
 async function test() {
     try {
@@ -12,8 +11,7 @@ async function test() {
 
 // export profile home page controller as function named index
 exports.index = (req, res) => {
-    User.find({name: 'Brian'}).then(data => console.log(data))
-    res.send('hi')
+    User.find({name: 'Brian'}).then(data => {console.log(data); res.json(data)})
 }
 
 exports.create_user = (req, res) => {
