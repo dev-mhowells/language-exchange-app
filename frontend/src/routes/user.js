@@ -20,14 +20,15 @@ export default function User() {
 
     return(
         <main className="profile-main">
-            <div className="profile-container profile-header"></div>
+            <div className="profile-container profile-header">
+                <div className="profile-banner"></div>
+            </div>
             <div className="profile-container profile-trust-container"></div>
-            <div className="profile-container profile-about-container"></div>
+            <div className="profile-container profile-about-container">
+                <textarea />
+            </div>
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container"></div>
-
-            {/* <h1>This is the user page</h1>
-            {userDisplay} */}
         </main>
     )
 }

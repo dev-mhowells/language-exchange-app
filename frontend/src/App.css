@@ -1,7 +1,9 @@
 :root {
   --border-color: #EBEBEB;
   --border-radius: .5em;
-  --background-color: #FDFCFF
+  --background-color: #FDFCFF;
+  --primary-color: #13293D;
+  --breakpoint: 800px;
 }
 
 html {
@@ -19,23 +21,50 @@ body {
 }
 
 .profile-main {
+  display: flex;
+  flex-direction: column;
   height: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-rows: 2fr 1fr 2fr;
-  gap: 2em;
-  margin: 2em;
+  margin: 1em;
+  gap: 1em;
+}
+
+@media (min-width: 800px) {
+  .profile-main {
+    margin: 2em;
+    display: grid;
+    gap: 2em;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 2fr 1fr 2fr;
+  }
 }
 
 .profile-container {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
   background-color: white;
+  min-height: 300px;
 }
 
-.profile-header {
-  grid-column: 1;
-  grid-row: 1;
+.profile-banner {
+  height: 50%;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.profile-about-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-about-container > textarea {
+  width: 90%;
+  height: 50%;
+  outline: none;
+  overflow: auto;
+  outline: none;
+  resize: none;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
+  padding: 1em;
 }
