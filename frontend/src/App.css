@@ -30,6 +30,15 @@ body {
   height: 100%;
 }
 
+button {
+    background-color: var(--highlight-color);
+    border: none;
+    border-radius: var(--border-radius);
+    padding: .5em 1em;
+    color: white;
+    font-family: 'Rubik', sans-serif;
+}
+
 .profile-main {
   display: flex;
   flex-direction: column;
@@ -56,56 +65,62 @@ body {
 }
 
 .profile-banner {
-  height: 50%;
+  height: 30%;
   background-color: var(--primary-color);
   border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .profile-content {
   width: 100%;
-  height: 50%;
+  height: 70%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr 1fr;
 }
 
-.profile-content > div {
-  border: 1px solid black;
+.profile-pic-container {
+  max-height: 120px;
+  display: flex;
+  justify-content: center;
+}
+
+.profile-pic {
+  height: 90%;
+  margin-top: -25%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background-color: var(--highlight-color);
 }
 
 .name-location-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  gap: 1em;
+  padding-top: 1em;
 }
 
 .location {
   padding: 0.3em 1.3em;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-
 }
 
 .edit-btn-container {
   display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.edit-btn {
-  background-color: var(--highlight-color);
-  border: none;
-  border-radius: var(--border-radius);
-  padding: .5em 1em;
-  color: white;
-  font-family: 'Rubik', sans-serif;
+  align-items: start;
+  justify-content: flex-end;
+  padding-top: 1em;
+  padding-right: 2em;
 }
 
 .languages-container {
   grid-column: span 2;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 1em;
+  justify-content: flex-end;
+  margin-bottom: 1em;
 }
 
 .language-rating {
@@ -145,6 +160,20 @@ body {
 .level-4 {
   height: 1.2em;
 }
+
+.friend-message-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 0.5em;
+  margin-bottom: 1em;
+}
+
+.message-btn {
+  margin-right: 2em;
+}
+
+/* ------------------- */
 
 .profile-about-container {
   display: flex;
