@@ -39,6 +39,11 @@ button {
     font-family: 'Rubik', sans-serif;
 }
 
+button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
 .profile-main {
   display: flex;
   flex-direction: column;

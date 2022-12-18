@@ -5,6 +5,7 @@ import ErrorPage from './error-page';
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./App.css"
 import User from './routes/user';
+import Register from './routes/Register';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -14,6 +15,10 @@ const router = createBrowserRouter([{
 {
   path:'user',
   element: <User />,
+},
+{
+  path:'register',
+  element: <Register />
 }])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
