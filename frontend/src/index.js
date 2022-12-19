@@ -7,6 +7,7 @@ import { AuthContextProvider } from './context/AuthContext';
 import "./App.css"
 import User from './routes/user';
 import Register from './routes/Register';
+import Login from './routes/Login';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -20,6 +21,10 @@ const router = createBrowserRouter([{
 {
   path:'register',
   element: <Register />
+},
+{
+  path: 'login',
+  element: <Login />
 }])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
