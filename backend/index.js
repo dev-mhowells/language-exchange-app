@@ -12,6 +12,14 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+// middleware
+
+// req.body will always be undefined without below middleware line
+app.use(express.json())
+app.use((req, res, next) => {
+    console.log(req.path, req.method)
+    next()
+})
 
 app.use('/', require('./routes/root'))
 app.use('/register', require('./routes/register'))
