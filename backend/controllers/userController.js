@@ -12,8 +12,21 @@ const createToken = (_id) => {
 
 
 exports.loginUser = async (req, res) => {
-    
-    res.json({message: 'login user'})
+
+    const {email, password} = req.body
+
+    try {
+        // will return the user for given credentials
+        const user = await User.login(email, password)
+        // create token
+        const token = createToken(user._id)
+        // respond with email and token
+        res.status(200).json({email, token})
+
+    } catch(error) {
+        // if error, throw error created in login method
+        res.status(400).json({error: error.message})
+    }
 }
 
 exports.registerUser = async (req, res) => {
@@ -29,7 +42,7 @@ exports.registerUser = async (req, res) => {
 
         // send response -- email and token
         res.status(200).json({email, token})
-        
+
     } catch (error) {
         // if error, throw error created in register method
         // tried above

@@ -46,4 +46,28 @@ UserSchema.statics.register = async function(email, password) {
     return user
 }
 
+// static login method
+UserSchema.statics.login = async function(email, password) {
+
+    if(!email || !password) {
+        throw Error('Please provide both fields')
+    }
+
+    const user = await this.findOne({email})
+
+    if(!user) {
+        throw Error('Email not registered')
+    }
+
+    // compares hashed password text to hashed password value
+    // in user object/ model
+    const match = await bcrypt.compare(password, user.password)
+
+    if(!match) {
+        throw Error('password incorrect')
+    }
+
+    return user
+} 
+
 module.exports = mongoose.model("User", UserSchema)
