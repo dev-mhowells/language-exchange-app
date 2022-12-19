@@ -1,15 +1,17 @@
 import { useState } from "react";
+import { useRegister } from '../hooks/useRegister'
 
 export default function Register() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const {register, isLoading, error} = useRegister()
 
     // async because needs to interact with backend
     const handleSubmit =  async(e) => {
         e.preventDefault();
-        console.log(`email is ${email}`)
-        console.log(`password is ${password}`)
+        
+        await register(email, password)
     }
 
     return(
@@ -30,7 +32,9 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}></input>
             </label>
-            <button type="submit">register</button>
+            {/* prevent form from being submitted while register is happening: */}
+            <button type="submit" disabled={isLoading}>register</button>
+            {error && <div>{error}</div>}
         </form>
     )
 }
