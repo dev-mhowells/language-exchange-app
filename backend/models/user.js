@@ -14,8 +14,8 @@ const SALT_ROUNDS = 10
 // })
 
 const UserSchema = new Schema({
-    email: {type: String, unique: true},
-    password: {type: String},
+    email: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
 })
 
 // statc signup method - creating own method here called signup

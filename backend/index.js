@@ -1,5 +1,5 @@
 const express = require("express")
-const pass = require('./apiKeys')
+const {pass} = require('./apiKeys')
 const app = express()
 const port = 5000
 

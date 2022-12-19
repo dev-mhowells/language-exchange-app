@@ -1,7 +1,18 @@
 const User = require('../models/user')
+const jwt = require('jsonwebtoken')
+const {secret} = require('../apiKeys')
+
+// takes Mongo id which will be part of token payload
+// secret is local secret used to encode data
+// third param is options, can set expiration for login
+const createToken = (_id) => {
+    // returns a token
+    return jwt.sign({_id}, secret, { expiresIn: '3d'})
+}
+
 
 exports.loginUser = async (req, res) => {
-    console.log(req.body)
+    
     res.json({message: 'login user'})
 }
 
@@ -13,8 +24,12 @@ exports.registerUser = async (req, res) => {
         // register is custom static method
         const user = await User.register(email, password)
 
-        // send response -- email and user object document
-        res.status(200).json({email, user})
+        // create token on register using user just created's id
+        const token = createToken(user._id)
+
+        // send response -- email and token
+        res.status(200).json({email, token})
+        
     } catch (error) {
         // if error, throw error created in register method
         // tried above
