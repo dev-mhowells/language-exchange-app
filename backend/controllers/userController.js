@@ -1,12 +1,11 @@
 const User = require('../models/user')
 
-async function test() {
-    try {
-        const user = await User.find()
-        console.log(user)
-    } catch(e) {
-        console.log(e.message)
-    }
+exports.loginUser = async (req, res) => {
+    res.json({message: 'login user'})
+}
+
+exports.registerUser = async (req, res) => {
+    res.json({message: 'sign up user'})
 }
 
 // export profile home page controller as function named index
@@ -27,3 +26,4 @@ exports.create_user = (req, res) => {
         res.redirect('/user').catch(err => console.log(err))
     })
 }
+
