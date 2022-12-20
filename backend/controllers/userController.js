@@ -1,6 +1,6 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
-const {secret} = require('../apiKeys')
+const secret = process.env.BCRYPT_SECRET
 
 // takes Mongo id which will be part of token payload
 // secret is local secret used to encode data
