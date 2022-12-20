@@ -1,4 +1,4 @@
-import  { createContext, useReducer } from 'react'
+import  { createContext, useReducer, useEffect } from 'react'
 
 // lets app know whether user is logged in or not - independent
 // from database
@@ -37,6 +37,24 @@ export const AuthContextProvider = ({children}) => {
     const [state, dispatch] = useReducer(authReducer, {
         user: null
     })
+
+    // this checks if user is logged in using localstorage, if so
+    // sets state above as the user object (which will be the jwt object)
+    // because this context wrapps the app it runs on every page load, if
+    // we did not get the user from local storage on each refresh, user would
+    // remain logged in as per local storage, but react would think user was logged
+    // out because as obove, initial state here is null
+    useEffect(() => {
+        // need to parse localstorage.getItem because it is
+        // stored as a JSON string there but we want to turn
+        // it into an object
+        const user = JSON.parse(localStorage.getItem('user'))
+
+        if(user) {
+            dispatch({type: 'LOGIN', payload: user})
+        }
+    }, [])
+
     console.log('Authocontext state:', state)
 
     // pass value as props, spread in state to access all values
