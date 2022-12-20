@@ -1,14 +1,12 @@
 const express = require("express")
 require('dotenv').config()
-const password = process.env.DATABASE_PASSWORD
 const app = express()
 const port = 5000
 
 // Set up mongoose connection
 const mongoose = require("mongoose");
 // add database name in here manually - language exchange
-const mongoDB = `mongodb+srv://admin:${password}@cluster0.zewjklq.mongodb.net/language-exchange?retryWrites=true&w=majority
-`;
+const mongoDB = process.env.DB_HOST;
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
