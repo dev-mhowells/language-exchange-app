@@ -3,13 +3,15 @@
   --border-radius: .5em;
   --background-color: #FDFCFF;
   --primary-color: #13293D;
-  --highlight-color: #006494;
+  --secondary-color: #006494;
+  --highlight-color: #247BA0;
   --breakpoint: 800px;
 }
 
 html {
   height: 100vh;
   font-family: 'Rubik', sans-serif;
+  font-weight: 300;
 }
 
 h1, h2, p {
@@ -31,7 +33,7 @@ body {
 }
 
 button {
-    background-color: var(--highlight-color);
+    background-color: var(--secondary-color);
     border: none;
     border-radius: var(--border-radius);
     padding: .5em 1em;
@@ -43,6 +45,77 @@ button:hover {
   cursor: pointer;
   opacity: 90%;
 }
+
+input, textarea {
+  font-family: 'Rubik', sans-serif;
+  font-weight: 300;
+  outline: none;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: .5em;
+}
+
+.link-text {
+  color: var(--highlight-color);
+}
+
+/* ----------------- /REGISTER ------------- */
+
+.register-page {
+  display: flex;
+  height: 100%;
+}
+
+.register-form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: 10%;
+  gap: .5em;
+  min-width: 400px;
+}
+
+.register-form > h2 {
+  margin-bottom: 1em;
+}
+
+.register-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  font-weight: 300;
+}
+
+.languages-label, 
+.about-label {
+  width: 80%;
+}
+
+.languages {
+  display: flex;
+  flex-direction: row;
+  gap: .5em;
+}
+
+.about-label > textarea {
+  height: 100px;
+}
+
+.register-btn {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.register-display-right {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+/* ----------------- USER PROFILE ------------- */
 
 .profile-main {
   display: flex;
@@ -94,7 +167,7 @@ button:hover {
   margin-top: -25%;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
-  background-color: var(--highlight-color);
+  background-color: var(--secondary-color);
 }
 
 .name-location-container {
@@ -146,7 +219,7 @@ button:hover {
 
 .level {
   border-radius: 50%;
-  background-color: var(--highlight-color);
+  background-color: var(--secondary-color);
   aspect-ratio: 1 / 1;
 }
 
@@ -189,11 +262,5 @@ button:hover {
 .profile-about-container > textarea {
   width: 90%;
   height: 50%;
-  outline: none;
-  overflow: auto;
-  outline: none;
-  resize: none;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  padding: 1em;
 }
+
