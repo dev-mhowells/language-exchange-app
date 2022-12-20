@@ -19,6 +19,8 @@ export const useRegister = () => {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             // pass in the email password object in JSON format
+            // this will be the req.body of user_controller.registerUser
+            // registerUser() in userController then responds with {email, token}
             body: JSON.stringify({email, password})
         })
         // this will either return json with token or err msg
@@ -34,7 +36,7 @@ export const useRegister = () => {
             // as a string in local storage
             localStorage.setItem('user', JSON.stringify(json))
 
-            // update auth context
+            // update auth context so that entire app knows user is logged in
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRegister } from '../hooks/useRegister'
+import Nav from "../components/Nav";
 
 export default function Register() {
 
@@ -15,6 +16,8 @@ export default function Register() {
     }
 
     return(
+        <div className="register-page">
+            <Nav />
         <form onSubmit={(e) => {handleSubmit(e)}}>
             <label>
                 email:
@@ -36,5 +39,6 @@ export default function Register() {
             <button type="submit" disabled={isLoading}>register</button>
             {error && <div>{error}</div>}
         </form>
+        </div>
     )
 }

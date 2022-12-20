@@ -1,7 +1,7 @@
 import  { createContext, useReducer } from 'react'
 
-// aim here is not to update database, but to keep local state
-// in sync with database
+// lets app know whether user is logged in or not - independent
+// from database
 
 // AuthContext is essentially a component with a Provider
 // which will wrap the entire app, as in the return val of

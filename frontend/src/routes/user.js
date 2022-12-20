@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import editIcon from "../images/edit-icon.png"
 import friendIcon from "../images/friend-icon.png"
 import messageIcon from "../images/message-icon.png"
+import Nav from "../components/Nav"
 
 export default function User() {
 
@@ -22,6 +23,7 @@ export default function User() {
     )})
 
     return(
+        <div className="profile-page">
         <main className="profile-main">
             <div className="profile-container profile-header">
                 <div className="profile-banner"></div>
@@ -71,5 +73,6 @@ export default function User() {
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container"></div>
         </main>
+        </div>
     )
 }
