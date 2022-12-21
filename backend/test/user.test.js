@@ -101,15 +101,18 @@ describe('POST /login', () => {
             done()
         })
     })
-    // it('errors if email not provided', () => {
-    //     const user = {
-    //         email: 'testemail1@email.com'
-    //     }
-    //     chai.request(app)
-    //     .post('user/login')
-    //     .send(user)
-    //     .end((err, res) => {
-    //         expect(res.status).to.equal(400)
-    //     })
-    // })
+    it('errors if email not provided', (done) => {
+        const user = {
+            email: '',
+            password: 'something'
+        }
+        chai.request(app)
+        .post('/user/login')
+        .send(user)
+        .end((err, res) => {
+            expect(res.status).to.equal(400)
+            expect(res.body.error).to.equal('Please provide both fields')
+            done()
+        })
+    })
 })
