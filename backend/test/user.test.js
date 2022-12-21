@@ -37,7 +37,7 @@ describe('POST /register', () => {
         .end((err, res) => {
             expect(res.status).to.equal(200)
             expect(res.body.email).to.equal('testemail1@email.com')
-            expect(res.body.token).to.not.equal('undefined')
+            expect(res.body.token).to.not.be.undefined
             done()
         })
 
@@ -60,7 +60,7 @@ describe('POST /register', () => {
             'email password',
             (err, foundUser) => {
                 expect(foundUser.email).to.equal('testemail2@email.com')
-                expect(foundUser.password).to.not.equal('undefined')
+                expect(foundUser.password).to.not.be.undefined
                 done()
             })
         })
@@ -83,4 +83,33 @@ describe('POST /register', () => {
             done()
         })
     })
+})
+
+describe('POST /login', () => {
+    it('returns an email and token', (done) => {
+        const user = {
+            email: 'testemail1@email.com',
+            password: 'something'
+        }
+        chai.request(app)
+        .post('/user/login')
+        .send(user)
+        .end((err, res) => {
+            expect(res.status).to.equal(200)
+            expect(res.body.email).to.equal(user.email)
+            expect(res.body.token).to.not.be.undefined
+            done()
+        })
+    })
+    // it('errors if email not provided', () => {
+    //     const user = {
+    //         email: 'testemail1@email.com'
+    //     }
+    //     chai.request(app)
+    //     .post('user/login')
+    //     .send(user)
+    //     .end((err, res) => {
+    //         expect(res.status).to.equal(400)
+    //     })
+    // })
 })
