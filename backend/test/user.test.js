@@ -66,4 +66,21 @@ describe('POST /register', () => {
         })
 
     })
+
+    it('fails when email already exists', (done) => {
+
+        const user = {
+            email: 'testemail2@email.com',
+            password: "something",
+        }
+
+        chai.request(app)
+        .post('/user/register')
+        .send(user)
+        .end((err, res) => {
+            expect(res.status).to.equal(400)
+            expect(res.body.error).to.equal('Email already exists')
+            done()
+        })
+    })
 })
