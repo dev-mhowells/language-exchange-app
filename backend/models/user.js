@@ -28,9 +28,10 @@ UserSchema.statics.register = async function(email, password) {
 
     // this error can be caught inside userController.js where
     // this signup method is called
-    if(exists) {
-        throw Error('Email already exists')
-    }
+    
+    // if(exists) {
+    //     throw Error('Email already exists')
+    // }
 
     // hash password
     // creating salt and hashing takes time to complete so need await

@@ -1,5 +1,6 @@
 const User = require('../models/user')
 const jwt = require('jsonwebtoken')
+require('dotenv').config()
 const secret = process.env.BCRYPT_SECRET
 
 // takes Mongo id which will be part of token payload
@@ -7,7 +8,8 @@ const secret = process.env.BCRYPT_SECRET
 // third param is options, can set expiration for login
 const createToken = (_id) => {
     // returns a token
-    return jwt.sign({_id}, secret, { expiresIn: '3d'})
+    const token = jwt.sign({_id}, secret, { expiresIn: '3d'})
+    return token
 }
 
 
