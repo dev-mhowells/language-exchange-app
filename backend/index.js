@@ -1,5 +1,5 @@
 const express = require("express")
-require('dotenv').config()
+require('dotenv').config({path: './.env.development'})
 const app = express()
 const port = 5000
 
@@ -12,7 +12,6 @@ const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 // middleware
-
 // req.body will always be undefined without below middleware line
 app.use(express.json())
 app.use((req, res, next) => {
