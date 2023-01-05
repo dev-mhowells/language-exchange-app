@@ -19,7 +19,8 @@ beforeAll((done) => {
 afterAll((done) => {
     User.deleteMany({}, function(err) {})
     done()
-    mongoose.connection.close()
+    // closing connection here causes tests to fail
+    // mongoose.connection.close()
 })
 
 describe('POST /register', () => {
