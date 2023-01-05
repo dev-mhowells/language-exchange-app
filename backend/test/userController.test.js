@@ -11,12 +11,12 @@ const User = require('../models/user')
 
 chai.use(chaiHttp)
 
-before((done) => {
+beforeAll((done) => {
     User.deleteMany({}, function(err) {})
     done()
 })
 
-after((done) => {
+afterAll((done) => {
     User.deleteMany({}, function(err) {})
     done()
     mongoose.connection.close()

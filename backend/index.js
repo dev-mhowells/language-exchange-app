@@ -24,10 +24,9 @@ app.use('/register', require('./routes/register'))
 app.use('/login', require('./routes/login'))
 app.use('/user', require('./routes/user'))
 
-console.log('state:', mongoose.connection.readyState)
+console.log('state:', db.models.User)
 
 // app.listen needs to be exported for mocha test
 module.exports = app.listen(port, () => {
     console.log(`listening on port ${port}`)
 })
-

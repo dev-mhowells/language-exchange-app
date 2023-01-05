@@ -54,7 +54,7 @@ exports.registerUser = async (req, res) => {
 
 // exports profile home page controller as function named index
 exports.index = (req, res) => {
-    User.find({name: 'Brian'}).then(data => {console.log(data); res.json(data)})
+    User.find().then(data => {console.log(data); res.json(data)})
 }
 
 exports.create_user = (req, res) => {
