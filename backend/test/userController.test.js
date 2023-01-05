@@ -30,6 +30,10 @@ describe('POST /register', () => {
         const user = {
             email: 'testemail1@email.com',
             password: "something",
+            name: "name",
+            age: 'age',
+            location: 'some location',
+            about: 'some information about the user'
         }
 
         chai.request(app)
@@ -49,6 +53,10 @@ describe('POST /register', () => {
         const user = {
             email: 'testemail2@email.com',
             password: "something",
+            name: "name",
+            age: 'age',
+            location: 'some location',
+            about: 'some information about the user'
         }
 
         chai.request(app)
@@ -71,8 +79,12 @@ describe('POST /register', () => {
     it('fails when email already exists', (done) => {
 
         const user = {
-            email: 'testemail2@email.com',
+            email: 'testemail1@email.com',
             password: "something",
+            name: "name",
+            age: 'age',
+            location: 'some location',
+            about: 'some information about the user'
         }
 
         chai.request(app)
@@ -92,6 +104,7 @@ describe('POST /login', () => {
             email: 'testemail1@email.com',
             password: 'something'
         }
+
         chai.request(app)
         .post('/user/login')
         .send(user)

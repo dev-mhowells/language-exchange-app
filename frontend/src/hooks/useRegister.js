@@ -8,7 +8,7 @@ export const useRegister = () => {
 
     // to be used on the submit of register form
     // email and password params will come straight from user input
-    const register = async (email, password) => {
+    const register = async (email, password, name, age, location, about) => {
         setIsLoading(true)
         // resets error every call
         setError(null)
@@ -21,7 +21,7 @@ export const useRegister = () => {
             // pass in the email password object in JSON format
             // this will be the req.body of user_controller.registerUser
             // registerUser() in userController then responds with {email, token}
-            body: JSON.stringify({email, password})
+            body: JSON.stringify({email, password, name, age, location, about})
         })
         // this will either return json with token or err msg
         const json = await response.json()

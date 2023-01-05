@@ -6,13 +6,17 @@ export default function Register() {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+    const [age, setAge] = useState("")
+    const [location, setLocation] = useState("")
+    const [about, setAbout] = useState("")
     const {register, isLoading, error} = useRegister()
 
     // async because needs to interact with backend
     const handleSubmit =  async(e) => {
         e.preventDefault();
-        
-        await register(email, password)
+        console.log(email, password, name, age, location, about)
+        await register(email, password, name, age, location, about)
     }
 
     return(
@@ -40,21 +44,24 @@ export default function Register() {
                     <input 
                     type='text' 
                     name='name'
-                    ></input>
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}></input>
                 </label>
                 <label>
                     Age:
                     <input 
                     type='text' 
                     name='age'
-                    ></input>
+                    value={age}
+                    onChange={(e) => setAge(e.target.value)}></input>
                 </label>
                 <label>
                     Location:
                     <input 
                     type='text' 
                     name='location'
-                    ></input>
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}></input>
                 </label>
                 <label className="languages-label">
                     Languages:
@@ -71,7 +78,7 @@ export default function Register() {
                 </label>
                 <label className="about-label">
                     About:
-                    <textarea />
+                    <textarea value={about} onChange={(e) => setAbout(e.target.value)}/>
                 </label>
                 {/* prevent form from being submitted while register is happening: */}
                 <button type="submit" disabled={isLoading} className="register-btn">register</button>

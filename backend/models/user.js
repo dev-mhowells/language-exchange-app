@@ -16,18 +16,18 @@ const SALT_ROUNDS = 10
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
-    // name: {type: String, required: true, minLength: 3, maxLength: 100},
-    // age: {type: String, require: true},
-    // location: {type: String, require: true},
+    name: {type: String, required: true, minLength: 3, maxLength: 100},
+    age: {type: String, require: true},
+    location: {type: String, require: true},
     // languages: {type: Array, require: true},
-    // about: {type: String, required: true, minLength: 10},
+    about: {type: String, required: true, minLength: 10},
 })
 
 // statc signup method - creating own method here called signup
 // when creating static method, can use 'this' to refer to the model
 // it is used on (in this case, User - the model name we export it as)
 // need to use regular function not arrow function here because need 'this' keyword
-UserSchema.statics.register = async function(email, password) {
+UserSchema.statics.register = async function(email, password, name, age, location, about) {
     // check if email exists in database
     const exists = await this.findOne({ email })
 
@@ -47,7 +47,7 @@ UserSchema.statics.register = async function(email, password) {
 
     // create is a mongoose function
     // equal to: doc = new User({email, password}); await doc.save() 
-    const user = await this.create({ email, password: hash })
+    const user = await this.create({ email, password: hash, name, age, location, about })
 
     return user
 }
