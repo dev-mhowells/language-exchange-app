@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const useRegister = () => {
     const [error, setError] = useState(null)
     const [isLoading, setIsLoading] = useState(null)
     const {dispatch} = useAuthContext()
+    const navigate = useNavigate()
 
     // to be used on the submit of register form
     // email and password params will come straight from user input
@@ -40,6 +42,8 @@ export const useRegister = () => {
             dispatch({type: 'LOGIN', payload: json})
 
             setIsLoading(false)
+
+            navigate('/user')
         }
     }
     return {register, isLoading, error}

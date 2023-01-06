@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRegister } from '../hooks/useRegister'
+import { Link } from "react-router-dom"
 import Nav from "../components/Nav";
 
 export default function Register() {
@@ -12,10 +13,10 @@ export default function Register() {
     const [about, setAbout] = useState("")
     const {register, isLoading, error} = useRegister()
 
+
     // async because needs to interact with backend
     const handleSubmit =  async(e) => {
         e.preventDefault();
-        console.log(email, password, name, age, location, about)
         await register(email, password, name, age, location, about)
     }
 
@@ -83,7 +84,7 @@ export default function Register() {
                 {/* prevent form from being submitted while register is happening: */}
                 <button type="submit" disabled={isLoading} className="register-btn">register</button>
                 {error && <div>{error}</div>}
-                <p className="link-text">Already have an account? Login</p>
+                <p className="link-text"><Link to={'/login'}>Already have an account? Login</Link></p>
             </form>
             <div className="register-display-right"></div>
         </div>
