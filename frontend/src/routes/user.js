@@ -24,6 +24,7 @@ export default function User() {
 
     return(
         <div className="profile-page">
+            <Nav />
         <main className="profile-main">
             <div className="profile-container profile-header">
                 <div className="profile-banner"></div>
