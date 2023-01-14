@@ -243,6 +243,13 @@ input, textarea {
   margin-right: 1em;
 }
 
+.level-hidden {
+  border-radius: 50%;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  aspect-ratio: 1 / 1;
+}
+
 .level {
   border-radius: 50%;
   background-color: var(--secondary-color);

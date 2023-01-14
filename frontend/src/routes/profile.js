@@ -37,6 +37,36 @@ export default function Profile() {
         }
     }, [user])
 
+    const languageAbilityDisplay = userData?.languages?.map((languageObj) => {
+
+        let level
+
+        switch(languageObj.level) {
+            case 'Beginner':
+                level = 1;
+                break;
+            case 'Intermediate':
+                level = 2;
+                break;
+            case 'Advanced':
+                level = 3;
+                break;
+            case 'Native':
+                level = 4;
+                break;
+        }
+
+        return (                        
+        <div className="language-rating">
+            <p>{languageObj.language}</p>
+            <div className="rating">
+                <span className={`${level >= 1 ? 'level' : 'level-hidden'} level-1`}></span>
+                <span className={`${level >= 2 ? 'level' : 'level-hidden'} level-2`}></span>
+                <span className={`${level >= 3 ? 'level' : 'level-hidden'} level-3`}></span>
+                <span className={`${level === 4 ? 'level' : 'level-hidden'} level-4`}></span>
+            </div>
+        </div>)})
+
     return(
         <div className="profile-page">
             <Nav />
@@ -57,24 +87,7 @@ export default function Profile() {
                         <button className="edit-btn"><img src={editIcon}></img></button>
                     </div>
                     <div className="languages-container">
-                        <div className="language-rating">
-                            <p>English</p>
-                            <div className="rating">
-                                <span className="level level-1"></span>
-                                <span className="level level-2"></span>
-                                <span className="level level-3"></span>
-                                <span className="level level-4"></span>
-                            </div>
-                        </div>
-                        <div className="language-rating">
-                            <p>Korean</p>
-                            <div className="rating">
-                                <span className="level level-1"></span>
-                                <span className="level level-2"></span>
-                                <span className="level level-3"></span>
-                                <span className="level level-4"></span>
-                            </div>
-                        </div>
+                        {languageAbilityDisplay}
                     </div>
                     <div className="friend-message-container">
                         <button className="add-friend-btn"><img src={friendIcon}></img></button>
