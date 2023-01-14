@@ -105,7 +105,7 @@ export default function Profile() {
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container">
                 <h3>Entries:</h3>
-                <Entries />
+                <Entries userId={userData._id}/>
             </div>
         </main>
         </div>

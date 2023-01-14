@@ -1,7 +1,7 @@
 import React from "react";
 import {useState} from 'react'
 
-const Entries = () => {
+const Entries = ({userId}) => {
     const exampleEntries = [
         {
             userId: 'asoduhasud',
@@ -22,12 +22,19 @@ const Entries = () => {
     const [title, setTitle] = useState('')
     const [entry, setEntry] = useState('')
 
+    const getDate = () => {
+        const date = new Date()
+        let month = date.getMonth() + 1
+        if (month < 10) {month = '0' + month}
+        return `${date.getDate()}.${month}.${date.getFullYear()}`
+    }
+
     const updateEntries = () => {
-        setEntries((prevEntries) => [...prevEntries, {title, entry}])
+        setEntries((prevEntries) => [...prevEntries, {title, entry, userId, date: getDate()}])
         setTitle('')
         setEntry('')
     }
-
+    console.log('THESE ARE ENTRIES', entries)
 
     const entriesDisplay = entries.map((entryObj) => (
         <div className="entry">
