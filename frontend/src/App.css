@@ -8,6 +8,18 @@
   --breakpoint: 800px;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 html {
   height: 100vh;
   font-family: 'Rubik', sans-serif;
@@ -99,6 +111,20 @@ input, textarea {
   display: flex;
   flex-direction: row;
   gap: .5em;
+}
+
+.language-dropdown {
+  border-radius: var(--border-radius);
+  border-color: var(--border-color);
+  padding: .5em 1em;
+  font-family: 'Rubik', sans-serif;
+  outline: none;
+  font-weight: 300;
+  width: 50%;
+}
+
+.add-language-btn > img {
+  max-height: 1.3em;
 }
 
 .about-label > textarea {
