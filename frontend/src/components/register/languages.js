@@ -8,14 +8,14 @@ const Languages = (props) => {
             type='text' 
             name='language'
             value={props.languages.language}
-            onChange={(e) => props.updateLanguage(0, e.target.value)}
+            onChange={(e) => props.updateLanguage(props.index, e.target.value)}
             ></input>
             <select 
             className="language-dropdown"
             type='text' 
             name='level'
             default='Beginner'
-            onChange={(e) => props.updateLevel(0, e.target.value)}
+            onChange={(e) => props.updateLevel(props.index, e.target.value)}
             >
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>

@@ -3,23 +3,13 @@ const Schema = mongoose.Schema
 const bcrypt = require('bcrypt')
 const SALT_ROUNDS = 10
 
-// old schema for user..
-
-// const UserSchema = new Schema({
-//     email: {type: String, required: true, unique: true},
-//     password: {type: String, required: true},
-//     name: {type: String, required: true, minLength: 3, maxLength: 100},
-//     age: {type: String, require: true},
-//     about: {type: String, required: true, minLength: 10},
-// })
-
 const UserSchema = new Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     name: {type: String, required: true, minLength: 3, maxLength: 100},
     age: {type: String, require: true},
     nationality: {type: String, require: true},
-    languages: {type: Object},
+    languages: {type: Array},
     about: {type: String, required: true, minLength: 10},
 })
 
