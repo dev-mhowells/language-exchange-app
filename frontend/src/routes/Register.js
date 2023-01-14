@@ -20,7 +20,7 @@ export default function Register() {
     // async because needs to interact with backend
     const handleSubmit =  async(e) => {
         e.preventDefault();
-        await register(email, password, name, age, nationality, about)
+        await register(email, password, name, age, nationality, languages, about)
     }
 
     return(

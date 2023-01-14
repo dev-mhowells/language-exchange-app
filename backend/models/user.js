@@ -18,8 +18,8 @@ const UserSchema = new Schema({
     password: {type: String, required: true},
     name: {type: String, required: true, minLength: 3, maxLength: 100},
     age: {type: String, require: true},
-    location: {type: String, require: true},
-    // languages: {type: Array, require: true},
+    nationality: {type: String, require: true},
+    languages: {type: Object},
     about: {type: String, required: true, minLength: 10},
 })
 
@@ -27,7 +27,7 @@ const UserSchema = new Schema({
 // when creating static method, can use 'this' to refer to the model
 // it is used on (in this case, User - the model name we export it as)
 // need to use regular function not arrow function here because need 'this' keyword
-UserSchema.statics.register = async function(email, password, name, age, location, about) {
+UserSchema.statics.register = async function(email, password, name, age, nationality, languages, about) {
     // check if email exists in database
     const exists = await this.findOne({ email })
 
@@ -47,7 +47,7 @@ UserSchema.statics.register = async function(email, password, name, age, locatio
 
     // create is a mongoose function
     // equal to: doc = new User({email, password}); await doc.save() 
-    const user = await this.create({ email, password: hash, name, age, location, about })
+    const user = await this.create({ email, password: hash, name, age, nationality, languages, about })
 
     return user
 }

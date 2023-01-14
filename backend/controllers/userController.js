@@ -33,11 +33,11 @@ exports.loginUser = async (req, res) => {
 
 exports.registerUser = async (req, res) => {
 
-    const {email, password, name, age, location, about} = req.body
+    const {email, password, name, age, nationality, languages, about} = req.body
 
     try {
         // register is custom static method
-        const user = await User.register(email, password, name, age, location, about)
+        const user = await User.register(email, password, name, age, nationality, languages, about)
 
         // create token on register using user just created's id
         const token = createToken(user._id)
