@@ -5,16 +5,12 @@ import messageIcon from "../images/message-icon.png"
 import Nav from "../components/Nav"
 import { useAuthContext } from '../hooks/useAuthContext'
 
-export default function User() {
+export default function Profile() {
 
     const [userData, setUserData] = useState('')
     const {user} = useAuthContext()
 
     useEffect(() => {
-        // if (user) {
-        // fetch('/profile').then(response => response.json())
-        // .then(data => {console.log('data in effect', data); setUserData(data)})
-        // }
         // we send the header with the auth token to /profile to be
         // grabbed on the backend middleware which will check validation
         const fetchProfile = async () => {
@@ -25,11 +21,12 @@ export default function User() {
             })
             // This is the res user from userProfileController -
             // use this to pop page!
-            const json = await response.json()
-            console.log('THIS IS USER - RES FROM PROFILE CONTROLLER', json)
+            const data = await response.json()
+            setUserData(data)
+            // console.log('THIS IS USER - RES FROM PROFILE CONTROLLER', json)
 
             if (response.ok) {
-                console.log(json)
+                console.log(data)
             }
         }
         // Here if the user logged in is not the owner of the profile page,
@@ -39,20 +36,6 @@ export default function User() {
             fetchProfile()
         }
     }, [user])
-
-    console.log('THIS IS USER - LOGGED IN', user)
-
-    // NOTE: will only be able to map data if data does not error
-    // as in the base there is not token
-
-    // const userDisplay = userData && userData.map((el) => { 
-    //     return (
-    //         <div>
-    //             <p>Name: {el.name}</p>
-    //             <p>Age: {el.age}</p>
-    //             <p>About: {el.about}</p>
-    //         </div>
-    // )})
 
     return(
         <div className="profile-page">
@@ -65,9 +48,9 @@ export default function User() {
                         <div className="profile-pic"></div>
                     </div>
                     <div className="name-location-container">
-                        <h2>Brian Smelter</h2>
+                        <h2>{userData.name}</h2>
                         <div>
-                            <span className="location">London, UK</span>
+                            <span className="location">{userData.nationality}</span>
                         </div>
                     </div>
                     <div className="edit-btn-container">

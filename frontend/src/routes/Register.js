@@ -3,6 +3,7 @@ import { useRegister } from '../hooks/useRegister'
 import { Link } from "react-router-dom"
 import plusIcon from '../images/plus-icon.png'
 import Nav from "../components/Nav";
+import Languages from "../components/register/languages";
 
 export default function Register() {
 
@@ -12,16 +13,40 @@ export default function Register() {
     const [age, setAge] = useState("")
     const [nationality, setNationality] = useState("")
     const [about, setAbout] = useState("")
-    const [languages, setLanguages] = useState({language: "", level: "Native"})
+    const [languages, setLanguages] = useState([{language: "", level: "Beginner"}])
     const {register, isLoading, error} = useRegister()
-
-    console.log(languages)
 
     // async because needs to interact with backend
     const handleSubmit =  async(e) => {
         e.preventDefault();
         await register(email, password, name, age, nationality, languages, about)
     }
+
+    const updateLanguage = (index, value) => {
+        const newLanguages = [...languages]
+        newLanguages[index].language = value
+        setLanguages(newLanguages)
+    }
+
+    const updateLevel = (index, value) => {
+        const newLanguages = [...languages]
+        newLanguages[index].level = value
+        setLanguages(newLanguages)
+    }
+    console.log(languages)
+
+    const addLanguage = () => {
+        setLanguages((prevLanguages) => [...prevLanguages, {language: "", level: "Beginner"}])
+    }
+
+    const languagesDisplay = languages.map((language, index) => 
+    <Languages 
+    languages={languages}
+    updateLanguage={updateLanguage}
+    updateLevel={updateLevel}
+    addLanguage={addLanguage}
+    index={index}
+    />)
 
     return(
         <div className="register-page">
@@ -72,27 +97,7 @@ export default function Register() {
                 </label>
                 <label className="languages-label">
                     Languages:
-                    <div className="languages">
-                        <input 
-                        type='text' 
-                        name='language'
-                        value={languages.language}
-                        onChange={(e) => setLanguages((languageObj) => ({...languageObj, language: e.target.value}))}
-                        ></input>
-                        <select 
-                        className="language-dropdown"
-                        type='text' 
-                        name='level'
-                        default='Native'
-                        onChange={(e) => setLanguages((languageObj) => ({...languageObj, level: e.target.value}))}
-                        >
-                            <option value="Native">Native</option>
-                            <option value="Advanced">Advanced</option>
-                            <option value="Intermediate">Intermediate</option>
-                            <option value="Beginner">Beginner</option>
-                        </select>
-                        {/* <button className="add-language-btn" type='button'><img src={plusIcon}></img></button> */}
-                    </div>
+                    {languagesDisplay}
                 </label>
                 <label className="about-label">
                     About:

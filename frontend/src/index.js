@@ -5,7 +5,7 @@ import ErrorPage from './error-page';
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import { AuthContextProvider } from './context/AuthContext';
 import "./App.css"
-import User from './routes/user';
+import Profile from './routes/profile';
 import Register from './routes/Register';
 import Login from './routes/Login';
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([{
 },
 {
   path:'user',
-  element: <User />,
+  element: <Profile />,
 },
 {
   path:'register',
