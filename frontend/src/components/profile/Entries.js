@@ -4,6 +4,7 @@ import {useState} from 'react'
 const Entries = ({userId}) => {
     const exampleEntries = [
         {
+            _id: '100',
             userId: 'asoduhasud',
             title: 'Some title',
             entry: 'This is some text someone might type',
@@ -11,6 +12,7 @@ const Entries = ({userId}) => {
             corrections: ['this is an example correction']
         },
         {
+            _id: '200',
             userId: 'asoduhasdaud',
             title: 'Some 2 title',
             entry: 'This is some text someone 2 might type',
@@ -34,13 +36,24 @@ const Entries = ({userId}) => {
         setTitle('')
         setEntry('')
     }
+
+    const deleteEntry = (id) => {
+        setEntries((prevEntries) => prevEntries.filter((entry) => { console.log('en', entry); return entry._id !== id}))
+    }
+
     console.log('THESE ARE ENTRIES', entries)
 
     const entriesDisplay = entries.map((entryObj) => (
-        <div className="entry">
-            <h3>{entryObj.title}</h3>
-            <p>{entryObj.date}</p>
-            <p>{entryObj.entry}</p>
+        <div className="entry-container">
+            <div className="entry">
+                <h3>{entryObj.title}</h3>
+                <p>{entryObj.date}</p>
+                <p>{entryObj.entry}</p>
+            </div>
+            <div className="entry-btns">
+                <button>edit</button>
+                <button onClick={() => {deleteEntry(entryObj._id)}}>delete</button>
+            </div>
         </div>
     ))
 
