@@ -346,3 +346,10 @@ input, textarea {
   max-height: 200px;
 }
 
+/* ----------- ENTRIES SECTION -------- */
+
+.create-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 10px
+}

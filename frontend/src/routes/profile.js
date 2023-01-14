@@ -3,6 +3,7 @@ import editIcon from "../images/edit-icon.png"
 import friendIcon from "../images/friend-icon.png"
 import messageIcon from "../images/message-icon.png"
 import Nav from "../components/Nav"
+import Entries from "../components/profile/Entries"
 import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function Profile() {
@@ -103,7 +104,8 @@ export default function Profile() {
             </div>
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container">
-                <h3>posts</h3>
+                <h3>Entries:</h3>
+                <Entries />
             </div>
         </main>
         </div>

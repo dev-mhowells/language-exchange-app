@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLogin } from "../hooks/useLogin";
+import { Link } from 'react-router-dom'
 
 export default function Login() {
 
@@ -35,6 +36,7 @@ export default function Login() {
                 </label>
                 <button type="submit" disabled={isLoading}>log in</button>
                 {error && <div>{error}</div>}
+                <p className="link-text"><Link to={'/register'}>Don't have an account yet? Register here</Link></p>
             </form>
             <div className="login-display-right"></div>
         </div>
