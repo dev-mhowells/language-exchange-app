@@ -3,24 +3,56 @@ import editIcon from "../images/edit-icon.png"
 import friendIcon from "../images/friend-icon.png"
 import messageIcon from "../images/message-icon.png"
 import Nav from "../components/Nav"
+import { useAuthContext } from '../hooks/useAuthContext'
 
 export default function User() {
 
     const [userData, setUserData] = useState('')
+    const {user} = useAuthContext()
 
     useEffect(() => {
-        fetch('/user').then(response => response.json())
-        .then(data => {setUserData(data)})
-    }, [])
+        // if (user) {
+        // fetch('/profile').then(response => response.json())
+        // .then(data => {console.log('data in effect', data); setUserData(data)})
+        // }
+        // we send the header with the auth token to /profile to be
+        // grabbed on the backend middleware which will check validation
+        const fetchProfile = async () => {
+            const response = await fetch('/profile', {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            })
+            // This is the res user from userProfileController -
+            // use this to pop page!
+            const json = await response.json()
+            console.log('THIS IS USER - RES FROM PROFILE CONTROLLER', json)
 
-    const userDisplay = userData && userData.map((el) => { 
-        return (
-            <div>
-                <p>Name: {el.name}</p>
-                <p>Age: {el.age}</p>
-                <p>About: {el.about}</p>
-            </div>
-    )})
+            if (response.ok) {
+                console.log(json)
+            }
+        }
+        // Here if the user logged in is not the owner of the profile page,
+        // they do not have permission to access the editable version of the page
+        
+        if (user) {
+            fetchProfile()
+        }
+    }, [user])
+
+    console.log('THIS IS USER - LOGGED IN', user)
+
+    // NOTE: will only be able to map data if data does not error
+    // as in the base there is not token
+
+    // const userDisplay = userData && userData.map((el) => { 
+    //     return (
+    //         <div>
+    //             <p>Name: {el.name}</p>
+    //             <p>Age: {el.age}</p>
+    //             <p>About: {el.about}</p>
+    //         </div>
+    // )})
 
     return(
         <div className="profile-page">

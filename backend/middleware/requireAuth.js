@@ -10,6 +10,8 @@ const requireAuth = async (req, res, next) => {
     // authorisation here from headers should contain token
     const  { authorization } = req.headers
 
+    console.log('REQUIRE AUTH RAN WITH', authorization)
+
     if(!authorization) {
         return res.status(401).json({error: 'Athorization token required'})
     }
@@ -17,6 +19,7 @@ const requireAuth = async (req, res, next) => {
     // authorization witll look like: 'Bearer asdhas.ashdouas.hoausdh'
     const token = authorization.split(' ')[1]
 
+    // verify token
     try {
         // returns payload of token, grab ID from token payload
         const {_id} = jwt.verify(token, process.env.BCRYPT_SECRET)
