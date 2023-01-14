@@ -141,6 +141,35 @@ input, textarea {
   width: 100%;
 }
 
+/* ----------------- LOGIN ------------- */
+
+.login-page {
+  display: flex;
+  height: 100%;
+}
+
+.login-form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: 10%;
+  gap: 1.5em;
+  min-width: 400px;
+}
+
+.login-display-right {
+  background-color: var(--primary-color);
+  width: 100%;
+}
+
+.login-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: .5em;
+  font-weight: 300;
+}
+
 /* ----------------- USER PROFILE ------------- */
 
 .nav {
