@@ -98,9 +98,10 @@ export default function Profile() {
             </div>
             <div className="profile-container profile-trust-container"></div>
             <div className="profile-container profile-about-container">
-                {/* <textarea /> */}
-                <h3>about</h3>
-                {userData.about}
+                <div className="about-text">
+                    <p>{userData.about}</p>
+                    {/* <textarea /> */}
+                </div>
             </div>
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container">
