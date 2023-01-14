@@ -213,31 +213,53 @@ input, textarea {
 }
 
 .profile-banner {
-  height: 30%;
+  height: 50%;
   background-color: var(--primary-color);
   border-radius: var(--border-radius) var(--border-radius) 0 0;
 }
 
 .profile-content {
   width: 100%;
-  height: 70%;
+  height: 50%;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr 1fr;
   /* grid-template-rows: 1fr 1fr; */
+}
+
+@media (min-width: 1000px) {
+  .profile-content {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .profile-pic-container {
   max-height: 120px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
+  align-content: flex-start;
+  margin-left: 2em;
+}
+
+@media (min-width: 1000px) {
+  .profile-pic-container {
+    margin-left: 0;
+  }
 }
 
 .profile-pic {
-  height: 90%;
-  margin-top: -25%;
+  height: 120px;
+  margin-top: -60px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   background-color: var(--secondary-color);
+}
+
+@media (min-width: 1000px) {
+  .profile-pic {
+    height: 150px;
+    margin-top: -75px;
+    margin-left: 2em;
+  }
 }
 
 .name-location-container {
@@ -245,6 +267,10 @@ input, textarea {
   flex-direction: column;
   gap: 1em;
   padding-top: 1em;
+}
+
+.name-location-container > * {
+  margin-left: 1em;
 }
 
 .location {
@@ -265,10 +291,28 @@ input, textarea {
   grid-column: span 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 1em;
+  align-items: flex-start;
   justify-content: flex-end;
+  margin-left: 2em;
   margin-bottom: 1em;
+  margin-top: 1em;
+  gap: .5em;
+}
+
+@media (min-width: 1000px) {
+  .edit-btn-container {
+    grid-column: 4;
+  }
+  .languages-container {
+    padding-top: 1em;
+    grid-row: 1;
+    grid-column: 3;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+    margin-top: 0;
+    margin-left: 0;
+  }
 }
 
 .language-rating {
@@ -322,6 +366,13 @@ input, textarea {
   justify-content: flex-end;
   gap: 0.5em;
   margin-bottom: 1em;
+}
+
+@media (min-width: 1000px) {
+  .friend-message-container {
+    grid-column: 4;
+    grid-row: 2;
+  }
 }
 
 .message-btn {

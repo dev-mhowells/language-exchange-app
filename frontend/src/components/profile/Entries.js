@@ -38,7 +38,7 @@ const Entries = ({userId}) => {
     }
 
     const deleteEntry = (id) => {
-        setEntries((prevEntries) => prevEntries.filter((entry) => { console.log('en', entry); return entry._id !== id}))
+        setEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id))
     }
 
     console.log('THESE ARE ENTRIES', entries)
