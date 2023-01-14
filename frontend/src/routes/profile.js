@@ -69,7 +69,7 @@ export default function Profile() {
 
     return(
         <div className="profile-page">
-            <Nav />
+        <Nav />
         <main className="profile-main">
             <div className="profile-container profile-header">
                 <div className="profile-banner"></div>
@@ -97,10 +97,14 @@ export default function Profile() {
             </div>
             <div className="profile-container profile-trust-container"></div>
             <div className="profile-container profile-about-container">
-                <textarea />
+                {/* <textarea /> */}
+                <h3>about</h3>
+                {userData.about}
             </div>
             <div className="profile-container profile-corrections-container"></div>
-            <div className="profile-container profile-posts-container"></div>
+            <div className="profile-container profile-posts-container">
+                <h3>posts</h3>
+            </div>
         </main>
         </div>
     )

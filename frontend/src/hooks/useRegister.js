@@ -43,7 +43,7 @@ export const useRegister = () => {
 
             setIsLoading(false)
 
-            navigate('/user')
+            navigate('/profile')
         }
     }
     return {register, isLoading, error}

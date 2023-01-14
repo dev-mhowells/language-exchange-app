@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "./useAuthContext";
 
 export const useLogout = () => {
+
+    const navigate = useNavigate()
 
     // dispatch for auth needed to reset type
     // so app knows user has logged out
@@ -14,6 +17,8 @@ export const useLogout = () => {
         // do not need to set a payload here as the LOGOUT
         // case in the authReducer in AuthContext sets payload to null
         dispatch({type: 'LOGOUT'})
+
+        navigate('/login')
     }
 
     return {logout}

@@ -10,7 +10,7 @@ export default function Nav() {
 
     return (
         <div className="nav">
-            <button onClick={handleCLick}>log out</button>
+            <button className="logout-btn" onClick={handleCLick}>log out</button>
         </div>
     )
 }
