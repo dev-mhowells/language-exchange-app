@@ -38,6 +38,8 @@ export default function Profile() {
         }
     }, [user])
 
+    console.log('FRONTEND USER DATA', userData)
+
     const languageAbilityDisplay = userData?.languages?.map((languageObj) => {
 
         let level
@@ -106,7 +108,7 @@ export default function Profile() {
             <div className="profile-container profile-corrections-container"></div>
             <div className="profile-container profile-posts-container">
                 <h3>Entries:</h3>
-                <Entries userId={userData._id}/>
+                {userData.entries && <Entries userId={userData._id} fetchedEntries={userData.entries}/>}
             </div>
         </main>
         </div>

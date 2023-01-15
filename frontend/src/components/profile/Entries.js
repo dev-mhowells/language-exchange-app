@@ -1,31 +1,13 @@
 import React from "react";
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
+import { useAuthContext } from "../../hooks/useAuthContext";
 
-const Entries = ({userId}) => {
+const Entries = ({userId, fetchedEntries}) => {
 
-    const exampleEntries = [
-        {
-            _id: '100',
-            userId: 'asoduhasud',
-            title: 'Some title',
-            entry: 'This is some text someone might type',
-            date: '01.01.2023',
-            corrections: ['this is an example correction']
-        },
-        {
-            _id: '200',
-            userId: 'asoduhasdaud',
-            title: 'Some 2 title',
-            entry: 'This is some text someone 2 might type',
-            date: '01.09.2023',
-            corrections: ['this is an example correction']
-        }
-    ]
-    const [entries, setEntries] = useState(exampleEntries)
+    const {user} = useAuthContext()
+    const [entries, setEntries] = useState(fetchedEntries)
     const [title, setTitle] = useState('')
     const [entry, setEntry] = useState('')
-
-    useEffect(() => {})
 
     const getDate = () => {
         const date = new Date()
@@ -34,17 +16,40 @@ const Entries = ({userId}) => {
         return `${date.getDate()}.${month}.${date.getFullYear()}`
     }
 
-    const updateEntries = () => {
-        setEntries((prevEntries) => [...prevEntries, {title, entry, userId, date: getDate()}])
+    const updateEntries = async () => {
+
+        const entryObj = {
+            user_id: userId,
+            title,
+            entry,
+            date: getDate(),
+        }
+
+        setEntries((prevEntries) => [...prevEntries, entryObj])
         setTitle('')
         setEntry('')
+
+        const response = await fetch('/profile/createEntry', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify(entryObj)
+        })
+        const json = await response.json()
+
+        if(!response.ok) {
+            console.log(json.error)
+        }
+        if(response.ok) {
+            console.log(json)
+        }
     }
 
     const deleteEntry = (id) => {
         setEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id))
     }
-
-    console.log('THESE ARE ENTRIES', entries)
 
     const entriesDisplay = entries.map((entryObj) => (
         <div className="entry-container">
@@ -68,7 +73,7 @@ const Entries = ({userId}) => {
         <label>entry 
             <textarea value={entry} onChange={((e) => setEntry(e.target.value))}></textarea>
         </label>
-        <button onClick={updateEntries}>post</button>
+        <button onClick={() => updateEntries()}>post</button>
     </div>)
 
     return (
