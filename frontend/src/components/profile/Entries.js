@@ -1,6 +1,7 @@
 import React from "react";
 import {useState} from 'react'
 import { useAuthContext } from "../../hooks/useAuthContext";
+import Entry from './Entry.js'
 
 const Entries = ({userId, fetchedEntries}) => {
 
@@ -47,43 +48,11 @@ const Entries = ({userId, fetchedEntries}) => {
         }
     }
 
-    const deleteEntry = async (id) => {
-        setEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id))
+    const entriesDisplay = entries.map((entryObj) => <Entry entryObj={entryObj} setEntries={setEntries}/>)
 
-        const response = await fetch('/profile/deleteEntry', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${user.token}`
-            },
-            body: JSON.stringify({_id: id})
-        })
-        const json = await response.json()
-
-        if(!response.ok) {
-            console.log(json.error)
-        }
-        if(response.ok) {
-            console.log(json)
-        }
-    }
-
-    const entriesDisplay = entries.map((entryObj) => (
-        <div className="entry-container">
-                <div className="entry-headers">
-                    <p className="entry-title">{entryObj.title}</p>
-                    <p>{entryObj.date}</p>
-                </div>
-                <p>{entryObj.entry}</p>
-            <div className="entry-btns">
-                <button>edit</button>
-                <button onClick={() => {deleteEntry(entryObj._id)}}>delete</button>
-            </div>
-        </div>
-    ))
-
-    const createEntry = (
-    <div className="create-entry">
+    return (
+        <section className="entries-section">
+                <div className="create-entry">
         <label>title
             <input value={title} onChange={((e) => setTitle(e.target.value))}></input>
         </label>
@@ -91,11 +60,7 @@ const Entries = ({userId, fetchedEntries}) => {
             <textarea value={entry} onChange={((e) => setEntry(e.target.value))}></textarea>
         </label>
         <button onClick={() => updateEntries()}>post</button>
-    </div>)
-
-    return (
-        <section className="entries-section">
-            {createEntry}
+    </div>
             <div className="entries-display">
                 {entriesDisplay}
             </div>
