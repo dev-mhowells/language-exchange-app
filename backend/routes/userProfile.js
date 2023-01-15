@@ -14,4 +14,6 @@ router.get('/', userProfile_controller.index)
 
 router.post('/createEntry', userProfile_controller.createEntry)
 
+router.get('/getEntries', userProfile_controller.getEntries)
+
 module.exports = router

@@ -1,7 +1,8 @@
 import React from "react";
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 const Entries = ({userId}) => {
+
     const exampleEntries = [
         {
             _id: '100',
@@ -23,6 +24,8 @@ const Entries = ({userId}) => {
     const [entries, setEntries] = useState(exampleEntries)
     const [title, setTitle] = useState('')
     const [entry, setEntry] = useState('')
+
+    useEffect(() => {})
 
     const getDate = () => {
         const date = new Date()

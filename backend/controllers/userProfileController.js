@@ -25,3 +25,19 @@ exports.createEntry = async (req, res) => {
         res.status(400).json({error: error.message})
     }
 }
+
+exports.getEntries = async (req, res) => {
+
+    try {
+
+        const currentUser = await User.findById(req.user.id)
+        const entries = await Entry.find({'user_id': { $in: currentUser} })
+        res.status(200).json(entries)
+
+    } catch(error) {
+
+        res.status(400).json({error: error.message})
+        
+    }
+
+}
