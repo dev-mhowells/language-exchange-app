@@ -13,7 +13,7 @@ exports.index = async (req, res) => {
     } catch(error) {
 
         res.status(400).json({error: error.message})
-        
+
     }
 }
 
@@ -29,6 +29,22 @@ exports.createEntry = async (req, res) => {
         await User.findOneAndUpdate(filter, {entries: newEntries})
 
         res.status(200).json(entry)
+
+    } catch(error) {
+
+        res.status(400).json({error: error.message})
+    }
+}
+
+exports.deleteEntry = async (req, res) => {
+
+    try {
+
+        const entryToDelete = req.body._id
+
+        await Entry.deleteOne({ _id: entryToDelete })
+
+        res.status(200).json({message: 'ok'})
 
     } catch(error) {
 
