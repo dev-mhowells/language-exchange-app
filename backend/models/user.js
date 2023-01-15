@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+const {ObjectId} = require('mongodb')
 const bcrypt = require('bcrypt')
 const SALT_ROUNDS = 10
 
@@ -11,6 +12,7 @@ const UserSchema = new Schema({
     nationality: {type: String, require: true},
     languages: {type: Array},
     about: {type: String, required: true, minLength: 10},
+    entries: [{type: ObjectId, ref: "Entry"}]
 })
 
 // statc signup method - creating own method here called signup

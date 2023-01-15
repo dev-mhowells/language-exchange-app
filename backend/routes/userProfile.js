@@ -12,4 +12,6 @@ router.use(requireAuth)
 
 router.get('/', userProfile_controller.index)
 
+router.post('/createEntry', userProfile_controller.createEntry)
+
 module.exports = router

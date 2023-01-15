@@ -45,7 +45,6 @@ const Entries = ({userId}) => {
 
     const entriesDisplay = entries.map((entryObj) => (
         <div className="entry-container">
-            {/* <div className="entry"> */}
                 <div className="entry-headers">
                     <p className="entry-title">{entryObj.title}</p>
                     <p>{entryObj.date}</p>
@@ -55,7 +54,6 @@ const Entries = ({userId}) => {
                 <button>edit</button>
                 <button onClick={() => {deleteEntry(entryObj._id)}}>delete</button>
             </div>
-          {/* </div> */}
         </div>
     ))
 

@@ -115,6 +115,7 @@ describe('POST /login', () => {
             done()
         })
     })
+    
     it('errors if email not provided', (done) => {
         const user = {
             email: '',
