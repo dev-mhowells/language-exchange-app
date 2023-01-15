@@ -47,8 +47,25 @@ const Entries = ({userId, fetchedEntries}) => {
         }
     }
 
-    const deleteEntry = (id) => {
+    const deleteEntry = async (id) => {
         setEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id))
+
+        const response = await fetch('/profile/deleteEntry', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify({_id: id})
+        })
+        const json = await response.json()
+
+        if(!response.ok) {
+            console.log(json.error)
+        }
+        if(response.ok) {
+            console.log(json)
+        }
     }
 
     const entriesDisplay = entries.map((entryObj) => (
