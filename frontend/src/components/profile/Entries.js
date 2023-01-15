@@ -26,7 +26,6 @@ const Entries = ({userId, fetchedEntries}) => {
             date: getDate(),
         }
 
-        setEntries((prevEntries) => [...prevEntries, entryObj])
         setTitle('')
         setEntry('')
 
@@ -39,6 +38,8 @@ const Entries = ({userId, fetchedEntries}) => {
             body: JSON.stringify(entryObj)
         })
         const json = await response.json()
+        console.log('JSON AFTER UPDATE', json)
+        setEntries((prevEntries) => [...prevEntries, json])
 
         if(!response.ok) {
             console.log(json.error)
