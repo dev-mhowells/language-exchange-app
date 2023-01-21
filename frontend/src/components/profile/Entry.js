@@ -16,10 +16,10 @@ const Entry = ({entryObj, setEntries}) => {
     } 
 
     const deleteEntry = async (id) => {
-        console.log('ID TO DELETE IN ENTRY', id)
+        
         setEntries((prevEntries) => prevEntries.filter((entry) => entry._id !== id))
 
-        const response = await fetch('/profile/deleteEntry', {
+        const response = await fetch('/entry/deleteEntry', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

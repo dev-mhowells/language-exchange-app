@@ -122,8 +122,6 @@ describe('POST /register', () => {
             about: 'some information about the user'
         }
 
-        // await User.create(user)
-
         chai.request(app)
         .post('/user/register')
         .send(user)
@@ -158,6 +156,21 @@ describe('POST /login', () => {
         const user = {
             email: '',
             password: 'something'
+        }
+        chai.request(app)
+        .post('/user/login')
+        .send(user)
+        .end((err, res) => {
+            expect(res.status).to.equal(400)
+            expect(res.body.error).to.equal('Please provide both fields')
+            done()
+        })
+    })
+
+    it('errors if password not provided', (done) => {
+        const user = {
+            email: 'test@email.com',
+            password: ''
         }
         chai.request(app)
         .post('/user/login')

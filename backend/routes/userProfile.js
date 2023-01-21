@@ -12,10 +12,4 @@ router.use(requireAuth)
 
 router.get('/', userProfile_controller.index)
 
-router.post('/createEntry', userProfile_controller.createEntry)
-
-router.get('/getEntries', userProfile_controller.getEntries)
-
-router.post('/deleteEntry', userProfile_controller.deleteEntry)
-
 module.exports = router

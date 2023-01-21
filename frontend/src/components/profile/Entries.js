@@ -29,7 +29,7 @@ const Entries = ({userId, fetchedEntries}) => {
         setTitle('')
         setEntry('')
 
-        const response = await fetch('/profile/createEntry', {
+        const response = await fetch('/entry/createEntry', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

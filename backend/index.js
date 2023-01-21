@@ -24,6 +24,7 @@ app.use((req, res, next) => {
 // app.use('/login', require('./routes/login'))
 app.use('/user', require('./routes/user'))
 app.use('/profile', require('./routes/userProfile'))
+app.use('/entry', require('./routes/entry'))
 
 console.log('state:', db.models.User)
 
