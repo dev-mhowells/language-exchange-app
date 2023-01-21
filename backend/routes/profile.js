@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const userProfile_controller = require('../controllers/userProfileController')
+const profile_controller = require('../controllers/profileController')
 
 const requireAuth = require('../middleware/requireAuth')
 
@@ -10,6 +10,6 @@ const requireAuth = require('../middleware/requireAuth')
 // these routes
 router.use(requireAuth)
 
-router.get('/', userProfile_controller.index)
+router.get('/', profile_controller.index)
 
 module.exports = router
