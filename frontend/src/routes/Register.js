@@ -44,8 +44,7 @@ export default function Register() {
         console.log(newLanguages)
         setLanguages(newLanguages)
     }
-
-    console.log('THESE ARE THE LANGUAGES', languages)
+    console.log('LANGUAGES', languages)
 
     const languagesDisplay = languages.map((language, index) => 
     <Languages 

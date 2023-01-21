@@ -2,20 +2,23 @@ import React from "react";
 import plusIcon from '../../images/plus-icon.png'
 import minusIcon from '../../images/minus-icon.png'
 
+
+
 const Languages = (props) => {
+
     return (
         <div className="languages">
             <input 
             type='text' 
             name='language'
-            value={props.languages.language}
+            value={props.languages[props.index].language}
             onChange={(e) => props.updateLanguage(props.index, e.target.value)}
             ></input>
             <select 
             className="language-dropdown"
             type='text' 
             name='level'
-            default='Beginner'
+            value={props.languages[props.index].level}
             onChange={(e) => props.updateLevel(props.index, e.target.value)}
             >
                 <option value="Beginner">Beginner</option>
