@@ -223,7 +223,6 @@ input, textarea {
   height: 50%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  /* grid-template-rows: 1fr 1fr; */
 }
 
 @media (min-width: 1000px) {
@@ -278,6 +277,25 @@ input, textarea {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
 }
+
+.profile-btns-icon {
+
+}
+
+.profile-btns-text {
+  display: none;
+}
+
+@media (min-width: 1000px) {
+  .profile-btns-icon {
+    display: none;
+  }
+  .profile-btns-text {
+    display: block;
+    font-size: 1em;
+  }
+}
+
 
 .edit-btn-container {
   display: flex;

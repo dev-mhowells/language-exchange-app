@@ -57,7 +57,7 @@ UserSchema.statics.login = async function(email, password) {
         throw Error('Email not registered')
     }
 
-    // compares hashed password text to hashed password value
+    // compares not yet hashed password text to hashed password value
     // in user object/ model
     const match = await bcrypt.compare(password, user.password)
 

@@ -11,17 +11,52 @@ const User = require('../models/user')
 
 chai.use(chaiHttp)
 
-beforeAll((done) => {
-    User.deleteMany({}, function(err) {})
-    done()
+// before(async () => {
+
+//     console.log('before ran')
+
+//     await User.deleteMany()
+
+//     const preExistingUser ={
+//         email: 'preExistingUser@email.com',
+//         password: "something",
+//         name: "name",
+//         age: 'age',
+//         location: 'some location',
+//         about: 'some information about the user'
+//     }
+
+//     await User.create(preExistingUser)
+
+//     // done()
+
+// })
+
+beforeEach(async () => {
+    console.log('before each ran')
+    await User.deleteMany()
+
+    const preExistingUser ={
+        email: 'preExistingUser@email.com',
+        password: "something",
+        name: "name",
+        age: 'age',
+        nationality: 'some location',
+        about: 'some information about the user'
+    }
+
+    await User.create(preExistingUser)
+
+    // db = await User.find()
+    // console.log(db)
 })
 
-afterAll((done) => {
-    User.deleteMany({}, function(err) {})
-    done()
-    // closing connection here causes tests to fail
-    // mongoose.connection.close()
-})
+// afterEach((done) => {
+//     User.deleteMany({}, function(err) {})
+//     done()
+//     // closing connection here causes tests to fail
+//     // mongoose.connection.close()
+// })
 
 describe('POST /register', () => {
 
@@ -32,7 +67,7 @@ describe('POST /register', () => {
             password: "something",
             name: "name",
             age: 'age',
-            location: 'some location',
+            nationality: 'some location',
             about: 'some information about the user'
         }
 
@@ -55,7 +90,7 @@ describe('POST /register', () => {
             password: "something",
             name: "name",
             age: 'age',
-            location: 'some location',
+            nationality: 'some location',
             about: 'some information about the user'
         }
 
@@ -79,13 +114,15 @@ describe('POST /register', () => {
     it('fails when email already exists', (done) => {
 
         const user = {
-            email: 'testemail1@email.com',
+            email: 'preExistingUser@email.com',
             password: "something",
             name: "name",
             age: 'age',
-            location: 'some location',
+            nationality: 'some location',
             about: 'some information about the user'
         }
+
+        // await User.create(user)
 
         chai.request(app)
         .post('/user/register')
@@ -99,9 +136,10 @@ describe('POST /register', () => {
 })
 
 describe('POST /login', () => {
-    it('returns an email and token', (done) => {
+    it('returns an email and token', async (done) => {
+        
         const user = {
-            email: 'testemail1@email.com',
+            email: 'preExistingUser@email.com',
             password: 'something'
         }
 

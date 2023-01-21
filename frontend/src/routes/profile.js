@@ -87,14 +87,17 @@ export default function Profile() {
                         </div>
                     </div>
                     <div className="edit-btn-container">
-                        <button className="edit-btn"><img src={editIcon}></img></button>
+                        <button className="edit-btn profile-btns-icon"><img src={editIcon}></img></button>
+                        <button className="edit-btn profile-btns-text">edit</button>
                     </div>
                     <div className="languages-container">
                         {languageAbilityDisplay}
                     </div>
                     <div className="friend-message-container">
-                        <button className="add-friend-btn"><img src={friendIcon}></img></button>
-                        <button className="message-btn"><img src={messageIcon}></img></button>
+                        <button className="add-friend-btn profile-btns-icon"><img src={friendIcon}></img></button>
+                        <button className="add-friend-btn profile-btns-text">friends</button>
+                        <button className="message-btn profile-btns-icon"><img src={messageIcon}></img></button>
+                        <button className="message-btn profile-btns-text">messages</button>
                     </div>
                 </div>
             </div>

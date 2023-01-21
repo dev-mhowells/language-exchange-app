@@ -41,7 +41,7 @@ const Entry = ({entryObj, setEntries}) => {
         <div className="entry-container">
         <div className="entry-headers">
             {isEditing ? 
-            <input onChange={(e) => (setTitle(e.target.value))}>{title}</input> 
+            <input onChange={(e) => (setTitle(e.target.value))} value={title}></input> 
             : 
             <p className="entry-title">{entryObj.title}</p>}
             <p>{entryObj.date}</p>

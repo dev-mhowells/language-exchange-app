@@ -33,11 +33,19 @@ export default function Register() {
         newLanguages[index].level = value
         setLanguages(newLanguages)
     }
-    console.log(languages)
 
     const addLanguage = () => {
         setLanguages((prevLanguages) => [...prevLanguages, {language: "", level: "Beginner"}])
     }
+
+    const removeLanguage = (index) => {
+        const newLanguages = [...languages]
+        newLanguages.splice(index, 1)
+        console.log(newLanguages)
+        setLanguages(newLanguages)
+    }
+
+    console.log('THESE ARE THE LANGUAGES', languages)
 
     const languagesDisplay = languages.map((language, index) => 
     <Languages 
@@ -45,6 +53,7 @@ export default function Register() {
     updateLanguage={updateLanguage}
     updateLevel={updateLevel}
     addLanguage={addLanguage}
+    removeLanguage={removeLanguage}
     index={index}
     />)
 
