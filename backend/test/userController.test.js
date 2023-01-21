@@ -11,27 +11,6 @@ const User = require('../models/user')
 
 chai.use(chaiHttp)
 
-// before(async () => {
-
-//     console.log('before ran')
-
-//     await User.deleteMany()
-
-//     const preExistingUser ={
-//         email: 'preExistingUser@email.com',
-//         password: "something",
-//         name: "name",
-//         age: 'age',
-//         location: 'some location',
-//         about: 'some information about the user'
-//     }
-
-//     await User.create(preExistingUser)
-
-//     // done()
-
-// })
-
 beforeEach(async () => {
     console.log('before each ran')
     await User.deleteMany()
@@ -47,16 +26,7 @@ beforeEach(async () => {
 
     await User.create(preExistingUser)
 
-    // db = await User.find()
-    // console.log(db)
 })
-
-// afterEach((done) => {
-//     User.deleteMany({}, function(err) {})
-//     done()
-//     // closing connection here causes tests to fail
-//     // mongoose.connection.close()
-// })
 
 describe('POST /register', () => {
 
