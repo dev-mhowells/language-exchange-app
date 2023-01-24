@@ -8,6 +8,7 @@ import "./App.css"
 import Profile from './routes/profile';
 import Register from './routes/Register';
 import Login from './routes/Login';
+import Feed from './routes/Feed';
 
 const router = createBrowserRouter([{
   path: '/',
@@ -25,6 +26,10 @@ const router = createBrowserRouter([{
 {
   path: 'login',
   element: <Login />
+},
+{
+  path: 'feed',
+  element: <Feed />
 }])
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

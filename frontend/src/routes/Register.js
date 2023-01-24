@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useRegister } from '../hooks/useRegister'
 import { Link } from "react-router-dom"
-import plusIcon from '../images/plus-icon.png'
-import Nav from "../components/Nav";
 import Languages from "../components/register/languages";
 
 export default function Register() {
