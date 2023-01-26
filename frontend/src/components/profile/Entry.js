@@ -38,7 +38,7 @@ const Entry = ({entryObj, setEntries}) => {
     }
 
     return (
-        <div className="entry-container">
+    <div className="entry-container">
         <div className="entry-headers">
             {isEditing ? 
             <input onChange={(e) => (setTitle(e.target.value))} value={title}></input> 
@@ -50,10 +50,10 @@ const Entry = ({entryObj, setEntries}) => {
         <textarea onChange={(e) => (setEntry(e.target.value))}>{entry}</textarea> 
         : 
         <p>{entryObj.entry}</p>}
-    <div className="entry-btns">
-        <button onClick={() => {editEntry()}}>edit</button>
-        <button onClick={() => {deleteEntry(entryObj._id)}}>delete</button>
-    </div>
+        <div className="entry-btns">
+            <button onClick={() => {editEntry()}}>edit</button>
+            <button onClick={() => {deleteEntry(entryObj._id)}}>delete</button>
+        </div>
 </div>
     )
 }

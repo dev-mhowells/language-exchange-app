@@ -74,6 +74,15 @@ input, textarea {
   color: var(--highlight-color);
 }
 
+.outlined-element {
+  padding: 0.3em 1.3em;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* ----------------- /REGISTER ------------- */
 
 .register-page {
@@ -508,3 +517,46 @@ input, textarea {
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
 }
+
+.entries-feed {
+  width: 100%;
+  margin-right: 1em;
+  margin-left: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.entry-container-outer {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.entry-poster-info {
+  display: flex;
+  gap: 1em;
+}
+
+.entry-poster-info > .profile-pic {
+  height: 80px;
+  margin: 0;
+}
+
+.entry-poster-info > .name p {
+  margin-top: 1em;
+}
+
+.corrections-comments{
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+
+.corrections-comments > button {
+  width: 100%;
+}
+
