@@ -1,4 +1,7 @@
 import Nav from "../components/Nav"
+import plusIconBoxed from '../images/plus-icon-boxed.png'
+import messageIconBlack from '../images/message-icon-black.png'
+import friendsIcon from '../images/friends-icon.png'
 
 const exampleEntries = [{title: 'something', entry: 'some text', date: '01.01.2023'},
                         {title: 'something2', entry: 'some text 2', date: '01.02.2023'}]
@@ -59,6 +62,22 @@ function Sidebar() {
                 </div>
         </div>
         <div className="divider" />
+        <div className="sidebar-links">
+            <ul>
+                <li>
+                    <img src={plusIconBoxed} className='sidebar-icon'></img>
+                    <p>post</p>
+                </li>
+                <li>
+                    <img src={messageIconBlack} className='sidebar-icon'></img>
+                    <p>message</p>
+                </li>
+                <li>
+                    <img src={friendsIcon} className='sidebar-icon'></img>
+                    <p>friends</p>
+                </li>
+            </ul>
+        </div>
     </div>)
 }
 

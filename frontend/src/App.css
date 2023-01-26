@@ -593,3 +593,29 @@ input, textarea {
   margin-right: 1em;
   margin-left: 1em;
 }
+
+.sidebar-links {
+  margin-top: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sidebar-links ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+}
+
+.sidebar-links li {
+  list-style-type: none;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+}
+
+.sidebar-icon {
+  width: 30px;
+}
