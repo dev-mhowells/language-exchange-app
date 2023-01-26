@@ -510,14 +510,6 @@ input, textarea {
   height: 100%;
 }
 
-.feed-sidebar {
-  margin-left: 1em;
-  margin-bottom: 1em;
-  width: 25%;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-}
-
 .entries-feed {
   width: 100%;
   margin-right: 1em;
@@ -546,8 +538,10 @@ input, textarea {
   margin: 0;
 }
 
-.entry-poster-info > .name p {
-  margin-top: 1em;
+.name-display {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 .corrections-comments{
@@ -560,3 +554,42 @@ input, textarea {
   width: 100%;
 }
 
+/* ------------- SIDEBAR ------------ */
+
+.sidebar {
+  margin-left: 1em;
+  margin-bottom: 1em;
+  width: 25%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+.sidebar-profile {
+  display: flex;
+  padding: 1em;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.sidebar-profile > .profile-pic {
+  margin: 0;
+}
+
+.profile-data-display {
+  display: flex;
+  gap: .5em;
+}
+
+.profile-data-el {
+  flex-direction: column;
+  gap: .5em;
+  padding: .5em;
+}
+
+.divider {
+  border-bottom: 1px solid var(--border-color);
+  margin-right: 1em;
+  margin-left: 1em;
+}

@@ -8,7 +8,7 @@ function FeedEntry({entry}) {
         <div className="entry-container-outer">
             <div className="entry-poster-info">
                 <div className="profile-pic"></div>
-                <div className="name">
+                <div className="name-display">
                     <h2>Brian Smelter</h2>
                     <p className="outlined-element">London</p>
                 </div>
@@ -34,14 +34,40 @@ const allEntries = exampleEntries.map((entry) => {
     return < FeedEntry entry={entry} />
 })
 
+function Sidebar() {
+    return (
+    <div className="sidebar">
+        <div className="sidebar-profile">
+            <div className="profile-pic"></div>
+                <div className="name-display">
+                    <h2>Brian Smelter</h2>
+                    <p className="outlined-element">London</p>
+                </div>
+                <div className="profile-data-display">
+                    <div className="profile-data-el outlined-element">
+                        <p>friends</p>
+                        <p>12</p>
+                    </div>
+                    <div className="profile-data-el outlined-element">
+                        <p>posts</p>
+                        <p>9</p>
+                    </div>
+                    <div className="profile-data-el outlined-element">
+                        <p>corrections</p>
+                        <p>11</p>
+                    </div>
+                </div>
+        </div>
+        <div className="divider" />
+    </div>)
+}
+
 export default function Feed() {
     return(
         <div className="feed-page">
             <Nav />
             <main className="feed-main">
-                <div className="feed-sidebar">
-                
-                </div>
+                <Sidebar />
                 <div className="entries-feed">
                 {allEntries}
                 </div>
