@@ -1,9 +1,7 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import Nav from "../components/Nav"
-import plusIconBoxed from '../images/plus-icon-boxed.png'
-import messageIconBlack from '../images/message-icon-black.png'
-import friendsIcon from '../images/friends-icon.png'
+import Sidebar from "../components/Sidebar"
 import arrowRight from '../images/arrow-right.png'
 import arrowLeft from '../images/arrow-left.png'
 
@@ -15,10 +13,21 @@ const exampleEntries = [{title: 'something', text: exampleEntry1, date: '01.01.2
 
 function Correction({entryText}) {
 
-    const [sentenceToCorrect, setSentenceToCorrect] = useState('')
+    const [sentenceToEdit, setSentenceToEdit] = useState('')
     const [count, setCount] = useState(0)
+    const [isEditing, setIsEditing] = useState(false)
+    const [entrySentences, setEntrySentences] = useState([])
 
-    const entrySentences = entryText.split('. ')
+    // const entrySentences = entryText.split('. ')
+
+    useEffect(() => {
+        const allSentences = entryText.split('. ')
+        setEntrySentences(allSentences)
+    }, [])
+
+    const sentenceObjects = entrySentences?.map((sentence) => {
+        return {sentence, markedCorrect: false, edited: false}
+    })
 
     const countUp = () => {
         if(count < entrySentences.length - 2) {
@@ -32,14 +41,49 @@ function Correction({entryText}) {
         }
     }
 
-    const correctedEntryDisplay = entrySentences.map((sentence, index) => {
+    const toggleIsEditing = () => {
+        setIsEditing((prevIsEditing) => !prevIsEditing)
+    }
+
+    const editSentence = (sentence) => {
+        setSentenceToEdit(sentence)
+    }
+
+    const editWrapper = (sentence) => {
+        toggleIsEditing()
+        editSentence(sentence)
+    }
+
+    const saveEdit = (sentenceIndex) => {
+        // WITH STATE
+        const newEntrySentences = entrySentences
+        newEntrySentences[sentenceIndex] = sentenceToEdit
+        setEntrySentences(newEntrySentences)
+        countUp()
+
+        // WITHOUT STATE
+        // sentenceObjects[sentenceIndex].sentence = sentenceToEdit
+        // console.log(sentenceObjects)
+    }
+
+    // const correctedEntryDisplay = entrySentences.map((sentence, index) => {
+
+    //     const styles = {
+    //         backgroundColor: index === count ? 'yellow' : 'transparent',
+    //         display: 'inline'
+    //     }
+
+    //     return <p style={styles}>{sentence}{`. `}</p>
+    // })
+
+    const correctedEntryDisplay2 = sentenceObjects?.map((sentenceObj, index) => {
 
         const styles = {
             backgroundColor: index === count ? 'yellow' : 'transparent',
             display: 'inline'
         }
 
-        return <p style={styles}>{sentence}{`. `}</p>
+        return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
     })
 
     return (
@@ -47,13 +91,16 @@ function Correction({entryText}) {
             <div className="progress-bar"></div>
             <div className="sentence-correction">
                 <p>{entrySentences[count]}</p>
+                <textarea className="edit-sentence" value={sentenceToEdit} onChange={(e) => setSentenceToEdit(e.target.value)}></textarea>
             </div>
             <div className="slider">
                 <button onClick={countDown}><img src={arrowLeft}></img></button>
+                <button onClick={() => editWrapper(entrySentences[count])}>edit</button>
+                <button onClick={() => saveEdit(count)}>save</button>
                 <button onClick={countUp}><img src={arrowRight}></img></button>
             </div>
             <div className="entry-correction">
-                {correctedEntryDisplay}
+                {correctedEntryDisplay2}
             </div>
         </div>
     )
@@ -91,50 +138,6 @@ function FeedEntry({entry}) {
 const allEntries = exampleEntries.map((entry) => {
     return < FeedEntry entry={entry} />
 })
-
-function Sidebar() {
-    return (
-    <div className="sidebar">
-        <div className="sidebar-profile">
-            <div className="profile-pic"></div>
-                <div className="name-display">
-                    <h2>Brian Smelter</h2>
-                    <p className="outlined-element">London</p>
-                </div>
-                <div className="profile-data-display">
-                    <div className="profile-data-el outlined-element">
-                        <p>friends</p>
-                        <p>12</p>
-                    </div>
-                    <div className="profile-data-el outlined-element">
-                        <p>posts</p>
-                        <p>9</p>
-                    </div>
-                    <div className="profile-data-el outlined-element">
-                        <p>corrections</p>
-                        <p>11</p>
-                    </div>
-                </div>
-        </div>
-        <div className="divider" />
-        <div className="sidebar-links">
-            <ul>
-                <li>
-                    <img src={plusIconBoxed} className='sidebar-icon'></img>
-                    <p>post</p>
-                </li>
-                <li>
-                    <img src={messageIconBlack} className='sidebar-icon'></img>
-                    <p>messages</p>
-                </li>
-                <li>
-                    <img src={friendsIcon} className='sidebar-icon'></img>
-                    <p>friends</p>
-                </li>
-            </ul>
-        </div>
-    </div>)
-}
 
 export default function Feed() {
     return(

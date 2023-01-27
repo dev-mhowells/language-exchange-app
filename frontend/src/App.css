@@ -633,6 +633,8 @@ input, textarea {
 }
 
 .sentence-correction {
+  display: flex;
+  flex-direction: column;
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
 }
@@ -652,4 +654,12 @@ input, textarea {
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   padding: 1em 2em;
+}
+
+.edit-sentence {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  font-size: 1em;
+  padding: 1em;
 }
