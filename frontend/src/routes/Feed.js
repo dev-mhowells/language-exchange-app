@@ -32,7 +32,15 @@ function Correction({entryText}) {
         }
     }
 
-    console.log(count)
+    const correctedEntryDisplay = entrySentences.map((sentence, index) => {
+
+        const styles = {
+            backgroundColor: index === count ? 'yellow' : 'transparent',
+            display: 'inline'
+        }
+
+        return <p style={styles}>{sentence}{`. `}</p>
+    })
 
     return (
         <div className="correction">
@@ -44,7 +52,9 @@ function Correction({entryText}) {
                 <button onClick={countDown}><img src={arrowLeft}></img></button>
                 <button onClick={countUp}><img src={arrowRight}></img></button>
             </div>
-            <div className="entry-correction"></div>
+            <div className="entry-correction">
+                {correctedEntryDisplay}
+            </div>
         </div>
     )
 }
