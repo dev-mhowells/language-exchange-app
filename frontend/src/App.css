@@ -619,3 +619,27 @@ input, textarea {
 .sidebar-icon {
   width: 30px;
 }
+
+/* -------------- CORRECTION ------------ */
+
+.correction {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.sentence-correction {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.sentence-correction > p {
+  margin-left: 2em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.slider {
+  display: flex;
+  justify-content: space-around;
+}
