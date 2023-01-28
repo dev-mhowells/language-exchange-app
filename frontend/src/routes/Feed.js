@@ -49,11 +49,16 @@ function Correction({entryText}) {
     }
 
     const saveEdit = (count) => {
-        if(entrySentences[count] !== sentenceToEdit) {
         const newEntrySentences = entrySentences
         newEntrySentences[count] = sentenceToEdit
-        newEntrySentences[count].edited = true
-        setEntrySentences(newEntrySentences)}
+
+        if(allSentences[count].sentence !== sentenceToEdit.sentence) {
+            newEntrySentences[count].edited = true
+            setEntrySentences(newEntrySentences)
+        } else {
+            newEntrySentences[count].edited = false
+            setEntrySentences(newEntrySentences)
+            }
     }
 
     const saveAndContinue = () => {
@@ -80,7 +85,6 @@ function Correction({entryText}) {
 
     return (
         <div className="correction">
-            <div className="progress-bar"></div>
             <div className="sentence-correction">
                 <p>{allSentences[count]?.sentence}</p>
                 <textarea className="edit-sentence" value={sentenceToEdit?.sentence} onChange={(e) => editSentence(e.target.value)}></textarea>
