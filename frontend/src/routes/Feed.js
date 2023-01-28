@@ -49,9 +49,11 @@ function Correction({entryText}) {
     }
 
     const saveEdit = (count) => {
+        if(entrySentences[count] !== sentenceToEdit) {
         const newEntrySentences = entrySentences
         newEntrySentences[count] = sentenceToEdit
-        setEntrySentences(newEntrySentences)
+        newEntrySentences[count].edited = true
+        setEntrySentences(newEntrySentences)}
     }
 
     const saveAndContinue = () => {
@@ -62,9 +64,15 @@ function Correction({entryText}) {
 
     const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
 
+        let color = 'transparent'
+        if (sentenceObj.edited === true) color = 'orange'
+        if (index === count) color = 'yellow'
+
         const styles = {
-            backgroundColor: index === count ? 'yellow' : 'transparent',
-            display: 'inline'
+            backgroundColor: color,
+            display: 'inline',
+            borderRadius: '.8em',
+            padding: '.3em 0.1em'
         }
 
         return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
