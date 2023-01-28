@@ -15,19 +15,22 @@ function Correction({entryText}) {
 
     const [sentenceToEdit, setSentenceToEdit] = useState('')
     const [count, setCount] = useState(0)
-    const [isEditing, setIsEditing] = useState(false)
     const [entrySentences, setEntrySentences] = useState([])
 
-    // const entrySentences = entryText.split('. ')
+    const allSentences = entryText.split('. ').map((sentence) => {
+        return {sentence, markedCorrect: false, edited: false}
+    })
 
     useEffect(() => {
-        const allSentences = entryText.split('. ')
         setEntrySentences(allSentences)
     }, [])
 
-    const sentenceObjects = entrySentences?.map((sentence) => {
-        return {sentence, markedCorrect: false, edited: false}
-    })
+    // keep sentence to edit in sync with display change from count
+    useEffect(() => {
+        !sentenceToEdit ? 
+        setSentenceToEdit(allSentences[count]) :
+        setSentenceToEdit(entrySentences[count])
+    }, [count])
 
     const countUp = () => {
         if(count < entrySentences.length - 2) {
@@ -41,42 +44,23 @@ function Correction({entryText}) {
         }
     }
 
-    const toggleIsEditing = () => {
-        setIsEditing((prevIsEditing) => !prevIsEditing)
-    }
-
     const editSentence = (sentence) => {
-        setSentenceToEdit(sentence)
+        setSentenceToEdit({...sentenceToEdit, sentence})
     }
 
-    const editWrapper = (sentence) => {
-        toggleIsEditing()
-        editSentence(sentence)
-    }
-
-    const saveEdit = (sentenceIndex) => {
-        // WITH STATE
+    const saveEdit = (count) => {
         const newEntrySentences = entrySentences
-        newEntrySentences[sentenceIndex] = sentenceToEdit
+        newEntrySentences[count] = sentenceToEdit
         setEntrySentences(newEntrySentences)
-        countUp()
-
-        // WITHOUT STATE
-        // sentenceObjects[sentenceIndex].sentence = sentenceToEdit
-        // console.log(sentenceObjects)
     }
 
-    // const correctedEntryDisplay = entrySentences.map((sentence, index) => {
+    const saveAndContinue = () => {
+        saveEdit(count)
+        countUp()
+        setSentenceToEdit(entrySentences[count])
+    }
 
-    //     const styles = {
-    //         backgroundColor: index === count ? 'yellow' : 'transparent',
-    //         display: 'inline'
-    //     }
-
-    //     return <p style={styles}>{sentence}{`. `}</p>
-    // })
-
-    const correctedEntryDisplay2 = sentenceObjects?.map((sentenceObj, index) => {
+    const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
 
         const styles = {
             backgroundColor: index === count ? 'yellow' : 'transparent',
@@ -90,17 +74,16 @@ function Correction({entryText}) {
         <div className="correction">
             <div className="progress-bar"></div>
             <div className="sentence-correction">
-                <p>{entrySentences[count]}</p>
-                <textarea className="edit-sentence" value={sentenceToEdit} onChange={(e) => setSentenceToEdit(e.target.value)}></textarea>
+                <p>{allSentences[count]?.sentence}</p>
+                <textarea className="edit-sentence" value={sentenceToEdit?.sentence} onChange={(e) => editSentence(e.target.value)}></textarea>
             </div>
             <div className="slider">
                 <button onClick={countDown}><img src={arrowLeft}></img></button>
-                <button onClick={() => editWrapper(entrySentences[count])}>edit</button>
                 <button onClick={() => saveEdit(count)}>save</button>
-                <button onClick={countUp}><img src={arrowRight}></img></button>
+                <button onClick={() => saveAndContinue()}><img src={arrowRight}></img></button>
             </div>
             <div className="entry-correction">
-                {correctedEntryDisplay2}
+                {correctedEntryDisplay}
             </div>
         </div>
     )
