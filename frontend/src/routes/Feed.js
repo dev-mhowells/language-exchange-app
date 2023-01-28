@@ -12,7 +12,7 @@ const exampleEntry2 = "Integer interdum sapien vel justo congue aliquet. Duis le
 const exampleEntries = [{title: 'something', text: exampleEntry1, date: '01.01.2023'},
                         {title: 'something2', text: exampleEntry2, date: '01.02.2023'}]
 
-const allCorrections = []
+let allCorrections = []
 
 function CorrectedEntry({sentenceObj, index, count}) {
     let color = 'transparent'
@@ -90,24 +90,8 @@ function Correction({entryText}) {
 
     const saveAndExit = () => {
         allCorrections = [...allCorrections, entrySentences]
+        console.log(allCorrections)
     }
-
-    // const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
-
-    //     let color = 'transparent'
-    //     if (sentenceObj.edited === true) color = '#FFF4CD'
-    //     if(sentenceObj.markedCorrect === true) color = '#C5FFAA'
-    //     if (index === count) color = '#FFF859'
-
-    //     const styles = {
-    //         backgroundColor: color,
-    //         display: 'inline',
-    //         padding: '.3em 0.1em',
-    //         boxShadow: '0 0 .3em .3em white inset'
-    //     }
-
-    //     return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
-    // })
 
     const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
         return <CorrectedEntry sentenceObj={sentenceObj} index={index} count={count} />
@@ -121,6 +105,7 @@ function Correction({entryText}) {
             </div>
             <div className="slider">
                 <button onClick={countDown}><img src={arrowLeft}></img></button>
+                <button onClick={saveAndExit}>save and exit</button>
                 <button onClick={() => saveAndContinue()}><img src={checkmark}></img></button>
             </div>
             <div className="entry-correction">
@@ -138,6 +123,17 @@ function FeedEntry({entry}) {
     const toggleMakeCorrection = () => {
         setShowMakeCorrection((prev) => !prev)
     }
+
+    const toggleShowCorrections = () => {
+        setShowCorrections((prev) => !prev)
+    }
+
+    const allCorrectionsDisplay = allCorrections.map((entrySentences) => {
+        const display = entrySentences.map((sentenceObj, index) => {
+            return <CorrectedEntry sentenceObj={sentenceObj} index={index} />
+        })
+        return <div className="entry-correction">{display}</div>
+    })
 
     return (
         <div className="entry-container-outer">
@@ -159,10 +155,11 @@ function FeedEntry({entry}) {
             </div>
             <div className="corrections-comments">
                 <button onClick={toggleMakeCorrection}>make a correction</button>
-                <button>corrections 0</button>
+                <button onClick={toggleShowCorrections}>corrections 0</button>
                 <button>comments 0</button>
             </div>
-            {showMakeCorrection && <Correction entryText={entry.text}/>}
+            {showMakeCorrection && <Correction entryText={entry.text}/>}        
+            {showCorrections && allCorrectionsDisplay}
         </div>
     )
 }
