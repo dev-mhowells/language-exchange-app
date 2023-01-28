@@ -12,6 +12,24 @@ const exampleEntry2 = "Integer interdum sapien vel justo congue aliquet. Duis le
 const exampleEntries = [{title: 'something', text: exampleEntry1, date: '01.01.2023'},
                         {title: 'something2', text: exampleEntry2, date: '01.02.2023'}]
 
+const allCorrections = []
+
+function CorrectedEntry({sentenceObj, index, count}) {
+    let color = 'transparent'
+        if (sentenceObj.edited === true) color = '#FFF4CD'
+        if(sentenceObj.markedCorrect === true) color = '#C5FFAA'
+        if (index === count) color = '#FFF859'
+
+        const styles = {
+            backgroundColor: color,
+            display: 'inline',
+            padding: '.3em 0.1em',
+            boxShadow: '0 0 .3em .3em white inset'
+        }
+
+        return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
+}
+
 function Correction({entryText}) {
 
     const [sentenceToEdit, setSentenceToEdit] = useState('')
@@ -70,23 +88,29 @@ function Correction({entryText}) {
         setSentenceToEdit(entrySentences[count])
     }
 
+    const saveAndExit = () => {
+        allCorrections = [...allCorrections, entrySentences]
+    }
+
+    // const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
+
+    //     let color = 'transparent'
+    //     if (sentenceObj.edited === true) color = '#FFF4CD'
+    //     if(sentenceObj.markedCorrect === true) color = '#C5FFAA'
+    //     if (index === count) color = '#FFF859'
+
+    //     const styles = {
+    //         backgroundColor: color,
+    //         display: 'inline',
+    //         padding: '.3em 0.1em',
+    //         boxShadow: '0 0 .3em .3em white inset'
+    //     }
+
+    //     return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
+    // })
+
     const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {
-
-        let color = 'transparent'
-        if (sentenceObj.edited === true) color = '#FFF4CD'
-        if(sentenceObj.markedCorrect === true) color = '#C5FFAA'
-        // if (sentenceObj.edited === false && count > index) color = 'green'
-        if (index === count) color = '#FFF859'
-
-        const styles = {
-            backgroundColor: color,
-            display: 'inline',
-            // borderRadius: '.6em',
-            padding: '.3em 0.1em',
-            boxShadow: '0 0 .3em .3em white inset'
-        }
-
-        return <p style={styles}>{sentenceObj.sentence}{`. `}</p>
+        return <CorrectedEntry sentenceObj={sentenceObj} index={index} count={count} />
     })
 
     return (
@@ -105,9 +129,16 @@ function Correction({entryText}) {
         </div>
     )
 }
-        
 
 function FeedEntry({entry}) {
+
+    const [showMakeCorrection, setShowMakeCorrection] = useState(false)
+    const [showCorrections, setShowCorrections] = useState(false)
+
+    const toggleMakeCorrection = () => {
+        setShowMakeCorrection((prev) => !prev)
+    }
+
     return (
         <div className="entry-container-outer">
             <div className="entry-poster-info">
@@ -127,10 +158,11 @@ function FeedEntry({entry}) {
                 </div>
             </div>
             <div className="corrections-comments">
+                <button onClick={toggleMakeCorrection}>make a correction</button>
                 <button>corrections 0</button>
                 <button>comments 0</button>
             </div>
-            <Correction entryText={entry.text}/>
+            {showMakeCorrection && <Correction entryText={entry.text}/>}
         </div>
     )
 }
