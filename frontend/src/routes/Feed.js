@@ -23,7 +23,7 @@ export default function Feed() {
             setAllEntries(data)
 
             if (response.ok) {
-                console.log(data)
+                console.log('ALL ENTRIES FETCHED', data)
             }
         }
 
