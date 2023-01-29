@@ -18,7 +18,7 @@ router.get('/getEntries', entry_controller.getEntries)
 
 router.post('/deleteEntry', entry_controller.deleteEntry)
 
-// router.get('/getCorrections', entry_controller.getCorrections)
+router.get('/getEntryCorrections', entry_controller.getEntryCorrections)
 
 router.post('/createCorrection', entry_controller.createCorrection)
 

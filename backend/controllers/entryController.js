@@ -60,16 +60,10 @@ exports.getEntries = async (req, res) => {
 exports.createCorrection = async (req, res) => {
 
     try {
-        // console.log("CREATE CORRECTION RAN WITH", req.body)
-        // const currentUser = await User.findById(req.user.id)
         const correction = new Correction(req.body)
-        // console.log("THIS IS THE CORRECTION", correction)
         correction.save()
-        console.log('this is the IDDD', req.body.entry_id)
         const entry = await Entry.findById(req.body.entry_id)
-        console.log('THIS IS THE ENTRY', entry.id)
         const filter = {_id: entry.id}
-        console.log('ENTRY>CORRECCTION', entry)
         const newCorrections = [...entry.corrections, correction]
         await Entry.findOneAndUpdate(filter, {corrections: newCorrections})
 
@@ -78,5 +72,20 @@ exports.createCorrection = async (req, res) => {
     } catch(error) {
 
         res.status(400).json({error: error.message})
+    }
+}
+
+exports.getEntryCorrections = async (req, res) => {
+
+    try {
+
+        const entry = await Entry.findById(req.body.entry_id)
+        const corrections = await Correction.find({'entry_id': { $in: entry} })
+        res.status(200).json(corrections)
+
+    } catch(error) {
+
+        res.status(400).json({error: error.message})
+        
     }
 }
