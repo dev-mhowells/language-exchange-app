@@ -41,7 +41,7 @@ export default function FeedEntry({entry}) {
                     <p className="entry-title">{entry.title}</p>
                     <p>{entry.date}</p>
                 </div>
-                <p>{entry.text}</p>
+                <p>{entry.entry}</p>
                 <div className="entry-btns">
                 </div>
             </div>
@@ -51,7 +51,7 @@ export default function FeedEntry({entry}) {
                 <button>comments 0</button>
             </div>
             {/* {showMakeCorrection && <Correction entryText={entry.text} setAllCorrections={setAllCorrections} allCorrections={allCorrections}/>}         */}
-            {showMakeCorrection && <Correction entryText={entry.text} allCorrections={allCorrections}/>}        
+            {showMakeCorrection && <Correction entryText={entry.entry} allCorrections={allCorrections}/>}        
             {showCorrections && allCorrectionsDisplay}
         </div>
     )
