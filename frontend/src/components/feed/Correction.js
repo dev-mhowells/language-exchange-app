@@ -10,6 +10,8 @@ export default function Correction({entryText, setAllCorrections, allCorrections
     const [count, setCount] = useState(0)
     const [entrySentences, setEntrySentences] = useState([])
 
+    console.log(entrySentences)
+
     const allSentences = entryText.split('. ').map((sentence) => {
         return {sentence, markedCorrect: false, edited: false}
     })

@@ -18,4 +18,8 @@ router.get('/getEntries', entry_controller.getEntries)
 
 router.post('/deleteEntry', entry_controller.deleteEntry)
 
+// router.get('/getCorrections', entry_controller.getCorrections)
+
+router.post('/createCorrection', entry_controller.createCorrection)
+
 module.exports = router

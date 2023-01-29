@@ -7,7 +7,7 @@ const EntrySchema = mongoose.Schema({
     date: {type: String, required: true},
     title: {type: String, required: true},
     entry: {type: String, required: true},
-    corrections: {type: Array},
+    corrections: [{type: ObjectId, ref: "Correction"}],
 })
 
 module.exports = mongoose.model("Entry", EntrySchema)

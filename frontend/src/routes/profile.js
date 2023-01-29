@@ -24,7 +24,6 @@ export default function Profile() {
             // use this to pop page!
             const data = await response.json()
             setUserData(data)
-            // console.log('THIS IS USER - RES FROM PROFILE CONTROLLER', json)
 
             if (response.ok) {
                 console.log(data)
