@@ -19,12 +19,10 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.use('/', require('./routes/root'))
-// app.use('/register', require('./routes/register'))
-// app.use('/login', require('./routes/login'))
 app.use('/user', require('./routes/user'))
 app.use('/profile', require('./routes/profile'))
 app.use('/entry', require('./routes/entry'))
+app.use('/feed', require ('./routes/feed'))
 
 console.log('state:', db.models.User)
 
