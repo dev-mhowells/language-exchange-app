@@ -1,6 +1,5 @@
 export default function CorrectedEntry({sentenceObj, index, count}) {
     let color = 'transparent'
-    console.log('THIS IS THE SENTENCE OBJECT', sentenceObj)
         if (sentenceObj.edited === true) color = '#FFF4CD'
         if(sentenceObj.markedCorrect === true) color = '#C5FFAA'
         if (index === count) color = '#FFF859'

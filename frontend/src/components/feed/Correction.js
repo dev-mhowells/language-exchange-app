@@ -1,14 +1,16 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import { useAuthContext } from "../../hooks/useAuthContext"
 import CorrectedEntry from "./CorrectedEntry"
 import arrowLeft from '../../images/arrow-left.png'
 import checkmark from '../../images/checkmark.png'
 
-export default function Correction({entryText, setAllCorrections, allCorrections}) {
+export default function Correction({entryText, setAllCorrections, allCorrections, entryId}) {
 
     const [sentenceToEdit, setSentenceToEdit] = useState('')
     const [count, setCount] = useState(0)
     const [entrySentences, setEntrySentences] = useState([])
+    const {user} = useAuthContext()
 
     const allSentences = entryText.split('. ').map((sentence) => {
         return {sentence, markedCorrect: false, edited: false}
@@ -62,13 +64,29 @@ export default function Correction({entryText, setAllCorrections, allCorrections
         setSentenceToEdit(entrySentences[count])
     }
 
-    // BUG - replaces whole array with instances of entrySentences
-    const saveAndExit = () => {
-        // const newAllCorrections = [...allCorrections, entrySentences]
-        // console.log(allCorrections)
-        // const corrrectedText = entrySentences
-        // setAllCorrections(newAllCorrections)
-        allCorrections = [...allCorrections, entrySentences]
+    const saveAndExit = async () => {
+
+        const correctionObject = {
+            // user_id: '',
+            entry_id: entryId,
+            corrections: entrySentences
+        }
+
+        const response = await fetch('/entry/createCorrection', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user.token}`
+            },
+            body: JSON.stringify(correctionObject),
+        })
+        const data = await response.json()
+
+        setAllCorrections((prev) => [...prev, data])
+
+        if (response.ok) {
+            console.log(data)
+        }
     }
 
     const correctedEntryDisplay = entrySentences?.map((sentenceObj, index) => {

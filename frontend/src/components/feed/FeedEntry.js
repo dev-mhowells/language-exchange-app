@@ -1,35 +1,16 @@
 import { useEffect, useState } from "react"
 import CorrectedEntry from "./CorrectedEntry"
 import Correction from "./Correction"
-import { useAuthContext } from "../../hooks/useAuthContext"
 
 export default function FeedEntry({entry}) {
 
     const [showMakeCorrection, setShowMakeCorrection] = useState(false)
     const [showCorrections, setShowCorrections] = useState(false)
     const [allCorrections, setAllCorrections] = useState([])
-    const {user} = useAuthContext()
 
-    console.log('this is the entry', entry)
-
-    // useEffect(() => {
-    //     if(entry.corrections.length > 0) setAllCorrections(entry.corrections)
-    // })
-
-    // const fetchCorrections = async () => {
-    //     const response = await fetch('/entry/getEntryCorrections', {
-    //         method: 'GET',
-    //         headers: {
-    //                 'Authorization': `Bearer ${user.token}`
-    //         },
-    //     })
-    //     const data = await response.json()
-    //     setAllCorrections(data)
-
-    //     if (response.ok) {
-    //         console.log('CORRECTIONS DATA', data)
-    //     }
-    // }
+    useEffect(() => {
+        if (entry.corrections.length > 0) setAllCorrections(entry.corrections)
+    }, [])
 
     const toggleMakeCorrection = () => {
         setShowMakeCorrection((prev) => !prev)
@@ -39,30 +20,12 @@ export default function FeedEntry({entry}) {
         setShowCorrections((prev) => !prev)
     }
 
-    const allCorrectionsDisplay = allCorrections.map((entrySentences) => {
-        const display = entrySentences.map((sentenceObj, index) => {
+    const correctionsDisplay = allCorrections?.map((correctionObj) => {
+        const display = correctionObj.corrections?.map((sentenceObj, index) => {
             return <CorrectedEntry sentenceObj={sentenceObj} index={index} />
         })
         return <div className="entry-correction">{display}</div>
     })
-
-    const newDisplay = entry.corrections?.map((correctionObj) => {
-        const display = correctionObj.corrections.map((sentenceObj, index) => {
-            return <CorrectedEntry sentenceObj={sentenceObj} index={index} />
-        })
-        return <div className="entry-correction">{display}</div>
-    })
-
-    // const allCorrectionsDisplay = entry.corrections?.map((entrySentences) => {
-    //     const display = entrySentences.map((sentenceObj, index) => {
-    //         return <CorrectedEntry sentenceObj={sentenceObj} index={index} />
-    //     })
-    //     return <div className="entry-correction">{display}</div>
-    // })
-
-    console.log('CORRECTIONS__', entry.corrections)
-
-    // console.log('ALL CORRECTIONS', allCorrections)
 
     return (
         <div className="entry-container-outer">
@@ -87,10 +50,8 @@ export default function FeedEntry({entry}) {
                 <button onClick={toggleShowCorrections}>corrections 0</button>
                 <button>comments 0</button>
             </div>
-            {/* {showMakeCorrection && <Correction entryText={entry.text} setAllCorrections={setAllCorrections} allCorrections={allCorrections}/>}         */}
-            {showMakeCorrection && <Correction entryText={entry.entry} allCorrections={allCorrections}/>}        
-            {/* {showCorrections && allCorrectionsDisplay} */}
-            {showCorrections && newDisplay}
+            {showMakeCorrection && <Correction entryText={entry.entry} entryId={entry._id} allCorrections={allCorrections} setAllCorrections={setAllCorrections}/>}        
+            {showCorrections && correctionsDisplay}
         </div>
     )
 }
